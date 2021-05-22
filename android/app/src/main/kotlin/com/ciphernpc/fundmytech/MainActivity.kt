@@ -1,4 +1,4 @@
-package com.example.fundmytech
+package com.ciphernpc.fundmytech
 
 import io.flutter.embedding.android.FlutterActivity
 
