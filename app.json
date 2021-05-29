@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "fundmytech",
-    "slug": "fundmytech",
+    "name": "FundMyTech",
+    "slug": "FundMyTech",
     "owner": "kushenthimira",
-    "version": "1.0.0",
+    "version": "test-1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
     "splash": {
@@ -16,9 +16,11 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cipher.fundmytech"
     },
     "android": {
+      "package": "com.cipher.fundmytech",
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#FFFFFF"
