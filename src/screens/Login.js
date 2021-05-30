@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { Image, StatusBar, TouchableWithoutFeedback } from "react-native";
 
-function Login(props) {
+function Login({ navigation }) {
   const FacebookIcon = (props) => <Icon {...props} name="facebook-outline" />;
   const GoogleIcon = (props) => <Icon {...props} name="google-outline" />;
   const TwitterIcon = (props) => <Icon {...props} name="twitter-outline" />;
@@ -28,26 +28,48 @@ function Login(props) {
   );
 
   return (
-    <Layout>
-      <StatusBar backgroundColor="white" barStyle="dark-content" />
+    <Layout style={{ flex: 1 }}>
+      <StatusBar backgroundColor="#222B45" barStyle="light-content" />
       <Image
-        style={{ width: 100, height: 100 }}
+        style={{
+          width: "40%",
+          height: "30%",
+          alignSelf: "center",
+          marginVertical: "10%",
+        }}
         source={require("../assets/login.png")}
       />
-      <Text>Login</Text>
-      <Text>Login with social networks</Text>
-      <ButtonGroup appearance="ghost">
+      <Text
+        category="h3"
+        style={{ fontWeight: "bold", textAlign: "center", marginBottom: "1%" }}
+      >
+        Login
+      </Text>
+      <Text
+        category="p1"
+        style={{ fontWeight: "bold", textAlign: "center" }}
+        appearance="hint"
+      >
+        Login with social networks
+      </Text>
+      <ButtonGroup style={{ alignSelf: "center" }} appearance="ghost">
         <Button accessoryLeft={FacebookIcon} />
         <Button accessoryLeft={GoogleIcon} />
         <Button accessoryLeft={TwitterIcon} />
       </ButtonGroup>
       <Input
+        style={{ marginHorizontal: "2%", marginVertical: "1%" }}
+        size="large"
+        status="primary"
         value={value}
         label="Email"
         placeholder="Your Email"
         onChangeText={(nextValue) => setValue(nextValue)}
       />
       <Input
+        style={{ marginHorizontal: "2%", marginVertical: "1%" }}
+        size="large"
+        status="primary"
         value={value}
         label="Password"
         placeholder="Your Password"
@@ -55,7 +77,24 @@ function Login(props) {
         secureTextEntry={secureTextEntry}
         onChangeText={(nextValue) => setValue(nextValue)}
       />
-      <Button status="primary">Login</Button>
+      <Button status="basic" appearance="ghost" style={{ marginTop: "5%" }}>
+        Forgot Password?
+      </Button>
+      <Button
+        style={{ marginHorizontal: "2%" }}
+        status="primary"
+        size="giant"
+        onPress={() => navigation.navigate("ProjectScreen")}
+      >
+        Login
+      </Button>
+      <Button
+        status="basic"
+        appearance="ghost"
+        onPress={() => navigation.navigate("SignUpScreen")}
+      >
+        Sign up
+      </Button>
     </Layout>
   );
 }

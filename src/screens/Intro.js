@@ -2,22 +2,53 @@ import { Layout, Text, Button, Icon } from "@ui-kitten/components";
 import React from "react";
 import { Image, StatusBar } from "react-native";
 
-function Intro(props) {
+function Intro({ navigation }) {
   const ArrowIcon = (props) => (
     <Icon {...props} name="arrow-ios-forward-outline" />
   );
 
   return (
-    <Layout>
-      <StatusBar backgroundColor="white" barStyle="dark-content" />
+    <Layout style={{ flex: 1 }}>
+      <StatusBar backgroundColor="#222B45" barStyle="light-content" />
       <Image
-        style={{ width: 100, height: 100 }}
+        style={{
+          width: "100%",
+          height: "50%",
+          alignSelf: "center",
+          marginVertical: "10%",
+        }}
         source={require("../assets/intro.png")}
       />
-      <Text>Make Your Dreams Come True</Text>
-      <Text>Have a Dream, Make a Plan and Go for it.</Text>
-      <Text>We'll make sure You Get there.</Text>
-      <Button status="primary" accessoryRight={ArrowIcon}>
+      <Text
+        category="h3"
+        style={{ fontWeight: "bold", textAlign: "center", marginBottom: "1%" }}
+      >
+        Make Your Dreams Come True
+      </Text>
+      <Text
+        category="p1"
+        appearance="hint"
+        style={{ textAlign: "center", marginBottom: "1%" }}
+      >
+        Have a Dream, Make a Plan
+      </Text>
+      <Text
+        category="p1"
+        appearance="hint"
+        style={{ textAlign: "center", marginBottom: "1%" }}
+      >
+        and Go for it.
+      </Text>
+      <Text category="p1" appearance="hint" style={{ textAlign: "center" }}>
+        We'll make sure You Get there.
+      </Text>
+      <Button
+        style={{ marginHorizontal: "2%", marginTop: "20%" }}
+        status="primary"
+        size="giant"
+        accessoryRight={ArrowIcon}
+        onPress={() => navigation.navigate("LoginScreen")}
+      >
         Get Started
       </Button>
     </Layout>
