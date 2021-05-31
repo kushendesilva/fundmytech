@@ -7,7 +7,7 @@ function RegularPost({ style, onPress, budget, votes, description, title }) {
   const DownVote = (props) => <Icon {...props} name="arrow-downward-outline" />;
 
   return (
-    <Card onPress={onPress} style={({ style }, { margin: "2%" })}>
+    <Card onPress={onPress} style={({ style }, { marginHorizontal: "2%" })}>
       <View>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View>

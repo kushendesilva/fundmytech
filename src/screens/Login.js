@@ -90,7 +90,7 @@ function Login({ navigation }) {
         style={{ marginHorizontal: "2%" }}
         status="primary"
         size="giant"
-        onPress={() => navigation.navigate("HomeScreen")}
+        onPress={() => navigation.navigate("HomeScreens")}
       >
         Login
       </Button>

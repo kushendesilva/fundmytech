@@ -59,7 +59,7 @@ function Reminder({ navigation }) {
         status="primary"
         size="giant"
         accessoryRight={CheckIcon}
-        onPress={() => navigation.navigate("HomeScreen")}
+        onPress={() => navigation.navigate("HomeScreens")}
       >
         Finish
       </Button>

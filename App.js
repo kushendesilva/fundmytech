@@ -1,11 +1,15 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as eva from "@eva-design/eva";
 import {
   ApplicationProvider,
   IconRegistry,
-  Layout,
+  BottomNavigation,
+  BottomNavigationTab,
+  Icon,
+  useTheme,
 } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { ThemeContext } from "./src/theme";
@@ -14,12 +18,14 @@ import Signup from "./src/screens/Signup";
 import Login from "./src/screens/Login";
 import Reminder from "./src/screens/Reminder";
 import Project from "./src/screens/Project";
-import RegularPost from "./src/components/RegularPost";
-import DeveloperPost from "./src/components/DeveloperPost";
 import Account from "./src/screens/Account";
 import Home from "./src/screens/Home";
 
 const MainStack = createStackNavigator();
+const HomeStack = createStackNavigator();
+const BottomTab = createBottomTabNavigator();
+const AccountIcon = (props) => <Icon {...props} name="person-outline" />;
+const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
 
 export default () => {
   const [theme, setTheme] = React.useState("light");
@@ -75,26 +81,10 @@ export default () => {
                 }}
               />
               <MainStack.Screen
-                name="HomeScreen"
-                component={Home}
+                name="HomeScreens"
+                component={HomeScreens}
                 options={{
-                  title: "Projects",
-                  headerShown: false,
-                }}
-              />
-              <MainStack.Screen
-                name="ProjectScreen"
-                component={Project}
-                options={{
-                  title: "Project Details",
-                  headerShown: false,
-                }}
-              />
-              <MainStack.Screen
-                name="AccountScreen"
-                component={Account}
-                options={{
-                  title: "Account Details",
+                  title: "Home",
                   headerShown: false,
                 }}
               />
@@ -105,3 +95,41 @@ export default () => {
     </>
   );
 };
+
+const HomeScreens = (props) => (
+  <HomeStack.Navigator>
+    <HomeStack.Screen
+      name="TabScreens"
+      component={TabNavigator}
+      options={{
+        title: "Home",
+        headerShown: false,
+      }}
+    />
+    <HomeStack.Screen
+      name="ProjectScreen"
+      component={Project}
+      options={{
+        title: "Project Details",
+        headerShown: false,
+      }}
+    />
+  </HomeStack.Navigator>
+);
+
+const BottomTabBar = ({ navigation, state }) => (
+  <BottomNavigation
+    selectedIndex={state.index}
+    onSelect={(index) => navigation.navigate(state.routeNames[index])}
+  >
+    <BottomNavigationTab title="Home" icon={HomeIcon} />
+    <BottomNavigationTab title="Account" icon={AccountIcon} />
+  </BottomNavigation>
+);
+
+const TabNavigator = () => (
+  <BottomTab.Navigator tabBar={(props) => <BottomTabBar {...props} />}>
+    <BottomTab.Screen name="HomeScreen" component={Home} />
+    <BottomTab.Screen name="AccountScreen" component={Account} />
+  </BottomTab.Navigator>
+);

@@ -22,6 +22,7 @@ function Account({ navigation }) {
         barStyle="light-content"
       />
       <Text
+        status="primary"
         category="h3"
         style={{
           fontWeight: "bold",

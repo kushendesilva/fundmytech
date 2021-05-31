@@ -6,7 +6,7 @@ function DeveloperPost({ style, onPress, budget, title, description, votes }) {
   const Heart = (props) => <Icon {...props} name="heart-outline" />;
 
   return (
-    <Card onPress={onPress} style={({ style }, { margin: "2%" })}>
+    <Card onPress={onPress} style={({ style }, { marginHorizontal: "2%" })}>
       <View>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View>

@@ -1,4 +1,11 @@
-import { Layout, Text, Button, Icon, useTheme } from "@ui-kitten/components";
+import {
+  Layout,
+  Text,
+  Button,
+  Icon,
+  useTheme,
+  TopNavigation,
+} from "@ui-kitten/components";
 import React from "react";
 import { Image, StatusBar, View } from "react-native";
 
@@ -8,6 +15,23 @@ function Project({ navigation }) {
   const UpVote = (props) => <Icon {...props} name="arrow-upward-outline" />;
   const DownVote = (props) => <Icon {...props} name="arrow-downward-outline" />;
   const GiftIcon = (props) => <Icon {...props} name="gift-outline" />;
+  const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
+
+  const BackAction = () => (
+    <Button
+      size="large"
+      status="primary"
+      appearance="ghost"
+      accessoryRight={BackIcon}
+      onPress={() => navigation.goBack()}
+    />
+  );
+
+  const Title = () => (
+    <Text category="h5" status="primary" style={{ fontWeight: "bold" }}>
+      Project Details
+    </Text>
+  );
 
   return (
     <Layout style={{ flex: 1 }}>
@@ -15,10 +39,11 @@ function Project({ navigation }) {
         backgroundColor={theme["color-primary-default"]}
         barStyle="light-content"
       />
+      <TopNavigation accessoryLeft={BackAction} title={Title} />
       <Image
         style={{
-          width: "80%",
-          height: "45%",
+          width: "64%",
+          height: "36%",
           alignSelf: "center",
           marginVertical: "10%",
         }}
@@ -90,7 +115,6 @@ function Project({ navigation }) {
         Rs.10,000
       </Text>
       <Button
-        onPress={() => navigation.navigate("AccountScreen")}
         style={{ marginHorizontal: "2%", marginTop: "8%" }}
         status="primary"
         size="giant"
