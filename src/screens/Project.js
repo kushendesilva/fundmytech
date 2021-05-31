@@ -1,13 +1,20 @@
-import { Layout, Text, Button, Icon } from "@ui-kitten/components";
+import { Layout, Text, Button, Icon, useTheme } from "@ui-kitten/components";
 import React from "react";
-import { Image, StatusBar } from "react-native";
+import { Image, StatusBar, View } from "react-native";
 
 function Project({ navigation }) {
+  const theme = useTheme();
+
+  const UpVote = (props) => <Icon {...props} name="arrow-upward-outline" />;
+  const DownVote = (props) => <Icon {...props} name="arrow-downward-outline" />;
   const GiftIcon = (props) => <Icon {...props} name="gift-outline" />;
 
   return (
     <Layout style={{ flex: 1 }}>
-      <StatusBar backgroundColor="#222B45" barStyle="light-content" />
+      <StatusBar
+        backgroundColor={theme["color-primary-default"]}
+        barStyle="light-content"
+      />
       <Image
         style={{
           width: "80%",
@@ -15,19 +22,36 @@ function Project({ navigation }) {
           alignSelf: "center",
           marginVertical: "10%",
         }}
-        source={require("../assets/project1.png")}
+        source={require("../assets/project.png")}
       />
-      <Text
-        category="h4"
-        style={{
-          fontWeight: "bold",
-          textAlign: "left",
-          marginBottom: "1%",
-          marginHorizontal: "3%",
-        }}
-      >
-        Lorem Ipsum
-      </Text>
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <Text
+          category="h4"
+          style={{
+            fontWeight: "bold",
+            textAlign: "left",
+            marginBottom: "1%",
+            marginHorizontal: "3%",
+          }}
+        >
+          Lorem Ipsum
+        </Text>
+        <View style={{ flexDirection: "row" }}>
+          <Button
+            accessoryLeft={UpVote}
+            size="small"
+            status="success"
+            appearance="ghost"
+          />
+          <Text style={{ alignSelf: "center", fontWeight: "bold" }}>150</Text>
+          <Button
+            accessoryLeft={DownVote}
+            size="small"
+            status="danger"
+            appearance="ghost"
+          />
+        </View>
+      </View>
       <Text
         category="p1"
         style={{
@@ -66,6 +90,7 @@ function Project({ navigation }) {
         Rs.10,000
       </Text>
       <Button
+        onPress={() => navigation.navigate("AccountScreen")}
         style={{ marginHorizontal: "2%", marginTop: "8%" }}
         status="primary"
         size="giant"

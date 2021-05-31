@@ -8,7 +8,7 @@ import {
   Layout,
 } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
-import { ThemeContext } from "./src/theme-context";
+import { ThemeContext } from "./src/theme";
 import Intro from "./src/screens/Intro";
 import Signup from "./src/screens/Signup";
 import Login from "./src/screens/Login";
@@ -16,11 +16,13 @@ import Reminder from "./src/screens/Reminder";
 import Project from "./src/screens/Project";
 import RegularPost from "./src/components/RegularPost";
 import DeveloperPost from "./src/components/DeveloperPost";
+import Account from "./src/screens/Account";
+import Home from "./src/screens/Home";
 
 const MainStack = createStackNavigator();
 
 export default () => {
-  const [theme, setTheme] = React.useState("dark");
+  const [theme, setTheme] = React.useState("light");
 
   const toggleTheme = () => {
     const nextTheme = theme === "light" ? "dark" : "light";
@@ -73,10 +75,26 @@ export default () => {
                 }}
               />
               <MainStack.Screen
+                name="HomeScreen"
+                component={Home}
+                options={{
+                  title: "Projects",
+                  headerShown: false,
+                }}
+              />
+              <MainStack.Screen
                 name="ProjectScreen"
                 component={Project}
                 options={{
                   title: "Project Details",
+                  headerShown: false,
+                }}
+              />
+              <MainStack.Screen
+                name="AccountScreen"
+                component={Account}
+                options={{
+                  title: "Account Details",
                   headerShown: false,
                 }}
               />

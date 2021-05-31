@@ -4,15 +4,22 @@ import {
   Icon,
   Input,
   Text,
-  ButtonGroup,
+  Select,
+  SelectItem,
+  IndexPath,
+  useTheme,
 } from "@ui-kitten/components";
 import React from "react";
-import { Image, StatusBar, TouchableWithoutFeedback, View } from "react-native";
+import { Image, StatusBar, TouchableWithoutFeedback } from "react-native";
 
 function Signup({ navigation }) {
-  const FacebookIcon = (props) => <Icon {...props} name="facebook-outline" />;
-  const GoogleIcon = (props) => <Icon {...props} name="google-outline" />;
-  const TwitterIcon = (props) => <Icon {...props} name="twitter-outline" />;
+  const theme = useTheme();
+
+  const data = ["Developer", "Donator"];
+  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
+  const displayValue = data[selectedIndex.row];
+
+  const renderOption = (title) => <SelectItem title={title} />;
 
   const [value, setValue] = React.useState("");
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
@@ -29,7 +36,10 @@ function Signup({ navigation }) {
 
   return (
     <Layout style={{ flex: 1 }}>
-      <StatusBar backgroundColor="#222B45" barStyle="light-content" />
+      <StatusBar
+        backgroundColor={theme["color-primary-default"]}
+        barStyle="light-content"
+      />
       <Image
         style={{
           width: "35%",
@@ -50,13 +60,20 @@ function Signup({ navigation }) {
         style={{ fontWeight: "bold", textAlign: "center", marginBottom: "2%" }}
         appearance="hint"
       >
-        Create Your Account with Social Networks
+        Create an Account
       </Text>
-      <ButtonGroup style={{ alignSelf: "center" }} appearance="ghost">
-        <Button accessoryLeft={FacebookIcon} />
-        <Button accessoryLeft={GoogleIcon} />
-        <Button accessoryLeft={TwitterIcon} />
-      </ButtonGroup>
+      <Select
+        status="primary"
+        size="large"
+        style={{ marginHorizontal: "2%" }}
+        label="Account Type"
+        placeholder="Default"
+        value={displayValue}
+        selectedIndex={selectedIndex}
+        onSelect={(index) => setSelectedIndex(index)}
+      >
+        {data.map(renderOption)}
+      </Select>
       <Input
         style={{ marginHorizontal: "2%", marginVertical: "1%" }}
         size="large"
@@ -86,30 +103,15 @@ function Signup({ navigation }) {
         secureTextEntry={secureTextEntry}
         onChangeText={(nextValue) => setValue(nextValue)}
       />
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-          marginTop: "5%",
-        }}
-      >
-        <Button
-          status="primary"
-          size="giant"
-          onPress={() => navigation.navigate("ReminderScreen")}
-        >
-          Signup as a Developer
-        </Button>
-        <Button
-          status="primary"
-          size="giant"
-          onPress={() => navigation.navigate("ProjectScreen")}
-        >
-          Signup as a Donator
-        </Button>
-      </View>
       <Button
-        style={{ marginTop: "2%" }}
+        style={{ margin: "2%" }}
+        status="primary"
+        size="giant"
+        onPress={() => navigation.navigate("ReminderScreen")}
+      >
+        Signup
+      </Button>
+      <Button
         status="basic"
         appearance="ghost"
         onPress={() => navigation.navigate("LoginScreen")}

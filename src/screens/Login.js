@@ -5,11 +5,14 @@ import {
   Input,
   Text,
   ButtonGroup,
+  useTheme,
 } from "@ui-kitten/components";
 import React from "react";
 import { Image, StatusBar, TouchableWithoutFeedback } from "react-native";
 
 function Login({ navigation }) {
+  const theme = useTheme();
+
   const FacebookIcon = (props) => <Icon {...props} name="facebook-outline" />;
   const GoogleIcon = (props) => <Icon {...props} name="google-outline" />;
   const TwitterIcon = (props) => <Icon {...props} name="twitter-outline" />;
@@ -29,7 +32,10 @@ function Login({ navigation }) {
 
   return (
     <Layout style={{ flex: 1 }}>
-      <StatusBar backgroundColor="#222B45" barStyle="light-content" />
+      <StatusBar
+        backgroundColor={theme["color-primary-default"]}
+        barStyle="light-content"
+      />
       <Image
         style={{
           width: "40%",
@@ -84,7 +90,7 @@ function Login({ navigation }) {
         style={{ marginHorizontal: "2%" }}
         status="primary"
         size="giant"
-        onPress={() => navigation.navigate("ProjectScreen")}
+        onPress={() => navigation.navigate("HomeScreen")}
       >
         Login
       </Button>

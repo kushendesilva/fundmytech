@@ -1,15 +1,20 @@
-import { Layout, Text, Button, Icon } from "@ui-kitten/components";
+import { Layout, Text, Button, Icon, useTheme } from "@ui-kitten/components";
 import React from "react";
 import { Image, StatusBar } from "react-native";
 
 function Intro({ navigation }) {
+  const theme = useTheme();
+
   const ArrowIcon = (props) => (
     <Icon {...props} name="arrow-ios-forward-outline" />
   );
 
   return (
     <Layout style={{ flex: 1 }}>
-      <StatusBar backgroundColor="#222B45" barStyle="light-content" />
+      <StatusBar
+        backgroundColor={theme["color-primary-default"]}
+        barStyle="light-content"
+      />
       <Image
         style={{
           width: "100%",

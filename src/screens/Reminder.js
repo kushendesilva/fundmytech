@@ -1,15 +1,20 @@
-import { Layout, Text, Button, Icon } from "@ui-kitten/components";
+import { Layout, Text, Button, Icon, useTheme } from "@ui-kitten/components";
 import React from "react";
 import { Image, StatusBar } from "react-native";
 
 function Reminder({ navigation }) {
+  const theme = useTheme();
+
   const CheckIcon = (props) => (
     <Icon {...props} name="checkmark-circle-outline" />
   );
 
   return (
     <Layout style={{ flex: 1 }}>
-      <StatusBar backgroundColor="#222B45" barStyle="light-content" />
+      <StatusBar
+        backgroundColor={theme["color-primary-default"]}
+        barStyle="light-content"
+      />
       <Image
         style={{
           width: "80%",
@@ -54,7 +59,7 @@ function Reminder({ navigation }) {
         status="primary"
         size="giant"
         accessoryRight={CheckIcon}
-        onPress={() => navigation.navigate("ProjectScreen")}
+        onPress={() => navigation.navigate("HomeScreen")}
       >
         Finish
       </Button>
