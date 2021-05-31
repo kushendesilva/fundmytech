@@ -15,13 +15,15 @@ import { Image, StatusBar, TouchableWithoutFeedback } from "react-native";
 function Signup({ navigation }) {
   const theme = useTheme();
 
-  const data = ["Developer", "Donator"];
+  const types = ["Developer", "Donator"];
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
-  const displayValue = data[selectedIndex.row];
+  const accountType = types[selectedIndex.row];
 
   const renderOption = (title) => <SelectItem title={title} />;
 
-  const [value, setValue] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
 
   const toggleSecureEntry = () => {
@@ -68,40 +70,40 @@ function Signup({ navigation }) {
         style={{ marginHorizontal: "2%" }}
         label="Account Type"
         placeholder="Default"
-        value={displayValue}
+        value={accountType}
         selectedIndex={selectedIndex}
         onSelect={(index) => setSelectedIndex(index)}
       >
-        {data.map(renderOption)}
+        {types.map(renderOption)}
       </Select>
       <Input
         style={{ marginHorizontal: "2%", marginVertical: "1%" }}
         size="large"
         status="primary"
-        value={value}
+        value={name}
         label="Name"
         placeholder="Your Full Name"
-        onChangeText={(nextValue) => setValue(nextValue)}
+        onChangeText={(nextValue) => setName(nextValue)}
       />
       <Input
         style={{ marginHorizontal: "2%", marginVertical: "1%" }}
         size="large"
         status="primary"
-        value={value}
+        value={email}
         label="Email"
         placeholder="Personal Email"
-        onChangeText={(nextValue) => setValue(nextValue)}
+        onChangeText={(nextValue) => setEmail(nextValue)}
       />
       <Input
         style={{ marginHorizontal: "2%", marginVertical: "1%" }}
         size="large"
         status="primary"
-        value={value}
+        value={password}
         label="Password"
         placeholder="Should contain at least 8 symbols"
         accessoryRight={renderIcon}
         secureTextEntry={secureTextEntry}
-        onChangeText={(nextValue) => setValue(nextValue)}
+        onChangeText={(nextValue) => setPassword(nextValue)}
       />
       <Button
         style={{ margin: "2%" }}

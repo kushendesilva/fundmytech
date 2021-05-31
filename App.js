@@ -9,7 +9,6 @@ import {
   BottomNavigation,
   BottomNavigationTab,
   Icon,
-  useTheme,
 } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { ThemeContext } from "./src/theme";
@@ -20,12 +19,14 @@ import Reminder from "./src/screens/Reminder";
 import Project from "./src/screens/Project";
 import Account from "./src/screens/Account";
 import Home from "./src/screens/Home";
+import Settings from "./src/screens/Settings";
 
 const MainStack = createStackNavigator();
 const HomeStack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
 const AccountIcon = (props) => <Icon {...props} name="person-outline" />;
 const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
+const SettingsIcon = (props) => <Icon {...props} name="settings-outline" />;
 
 export default () => {
   const [theme, setTheme] = React.useState("light");
@@ -124,6 +125,7 @@ const BottomTabBar = ({ navigation, state }) => (
   >
     <BottomNavigationTab title="Home" icon={HomeIcon} />
     <BottomNavigationTab title="Account" icon={AccountIcon} />
+    <BottomNavigationTab title="Settings" icon={SettingsIcon} />
   </BottomNavigation>
 );
 
@@ -131,5 +133,6 @@ const TabNavigator = () => (
   <BottomTab.Navigator tabBar={(props) => <BottomTabBar {...props} />}>
     <BottomTab.Screen name="HomeScreen" component={Home} />
     <BottomTab.Screen name="AccountScreen" component={Account} />
+    <BottomTab.Screen name="SettingsScreen" component={Settings} />
   </BottomTab.Navigator>
 );

@@ -17,7 +17,8 @@ function Login({ navigation }) {
   const GoogleIcon = (props) => <Icon {...props} name="google-outline" />;
   const TwitterIcon = (props) => <Icon {...props} name="twitter-outline" />;
 
-  const [value, setValue] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
 
   const toggleSecureEntry = () => {
@@ -67,21 +68,21 @@ function Login({ navigation }) {
         style={{ marginHorizontal: "2%", marginVertical: "1%" }}
         size="large"
         status="primary"
-        value={value}
+        value={email}
         label="Email"
         placeholder="Your Email"
-        onChangeText={(nextValue) => setValue(nextValue)}
+        onChangeText={(nextValue) => setEmail(nextValue)}
       />
       <Input
         style={{ marginHorizontal: "2%", marginVertical: "1%" }}
         size="large"
         status="primary"
-        value={value}
+        value={password}
         label="Password"
         placeholder="Your Password"
         accessoryRight={renderIcon}
         secureTextEntry={secureTextEntry}
-        onChangeText={(nextValue) => setValue(nextValue)}
+        onChangeText={(nextValue) => setPassword(nextValue)}
       />
       <Button status="basic" appearance="ghost" style={{ marginTop: "5%" }}>
         Forgot Password?
