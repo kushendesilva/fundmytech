@@ -2,7 +2,11 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as eva from "@eva-design/eva";
-import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
+import {
+  ApplicationProvider,
+  IconRegistry,
+  Layout,
+} from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { ThemeContext } from "./src/theme-context";
 import Intro from "./src/screens/Intro";
@@ -10,6 +14,8 @@ import Signup from "./src/screens/Signup";
 import Login from "./src/screens/Login";
 import Reminder from "./src/screens/Reminder";
 import Project from "./src/screens/Project";
+import RegularPost from "./src/components/RegularPost";
+import DeveloperPost from "./src/components/DeveloperPost";
 
 const MainStack = createStackNavigator();
 

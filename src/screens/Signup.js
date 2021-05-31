@@ -7,7 +7,7 @@ import {
   ButtonGroup,
 } from "@ui-kitten/components";
 import React from "react";
-import { Image, StatusBar, TouchableWithoutFeedback } from "react-native";
+import { Image, StatusBar, TouchableWithoutFeedback, View } from "react-native";
 
 function Signup({ navigation }) {
   const FacebookIcon = (props) => <Icon {...props} name="facebook-outline" />;
@@ -47,7 +47,7 @@ function Signup({ navigation }) {
       </Text>
       <Text
         category="p1"
-        style={{ fontWeight: "bold", textAlign: "center" }}
+        style={{ fontWeight: "bold", textAlign: "center", marginBottom: "2%" }}
         appearance="hint"
       >
         Create Your Account with Social Networks
@@ -57,16 +57,6 @@ function Signup({ navigation }) {
         <Button accessoryLeft={GoogleIcon} />
         <Button accessoryLeft={TwitterIcon} />
       </ButtonGroup>
-      {/* <Menu
-        style={{ marginHorizontal: "2%" }}
-        selectedIndex={selectedIndex}
-        onSelect={(index) => setSelectedIndex(index)}
-      >
-        <MenuGroup title="Account Type" accessoryLeft={AccountIcon}>
-          <MenuItem title="Developer" accessoryLeft={CodeIcon} />
-          <MenuItem title="Regular" accessoryLeft={HeartIcon} />
-        </MenuGroup>
-      </Menu> */}
       <Input
         style={{ marginHorizontal: "2%", marginVertical: "1%" }}
         size="large"
@@ -96,15 +86,30 @@ function Signup({ navigation }) {
         secureTextEntry={secureTextEntry}
         onChangeText={(nextValue) => setValue(nextValue)}
       />
-      <Button
-        style={{ marginHorizontal: "2%", marginTop: "5%" }}
-        status="primary"
-        size="giant"
-        onPress={() => navigation.navigate("ReminderScreen")}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-evenly",
+          marginTop: "5%",
+        }}
       >
-        Sign Up
-      </Button>
+        <Button
+          status="primary"
+          size="giant"
+          onPress={() => navigation.navigate("ReminderScreen")}
+        >
+          Signup as a Developer
+        </Button>
+        <Button
+          status="primary"
+          size="giant"
+          onPress={() => navigation.navigate("ProjectScreen")}
+        >
+          Signup as a Donator
+        </Button>
+      </View>
       <Button
+        style={{ marginTop: "2%" }}
         status="basic"
         appearance="ghost"
         onPress={() => navigation.navigate("LoginScreen")}
