@@ -23,7 +23,7 @@ function AccountTabs({ tabIcon, title, onPress }) {
               status="primary"
               appearance="ghost"
             />
-            <Text category="h5" style={{ fontWeight: "bold" }}>
+            <Text category="h6" style={{ fontWeight: "bold" }}>
               {title}
             </Text>
           </View>

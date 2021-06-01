@@ -39,10 +39,10 @@ function Login({ navigation }) {
       />
       <Image
         style={{
-          width: "40%",
-          height: "30%",
+          width: "36%",
+          height: "27%",
           alignSelf: "center",
-          marginVertical: "10%",
+          marginVertical: "5%",
         }}
         source={require("../assets/login.png")}
       />

@@ -48,7 +48,7 @@ function Intro({ navigation }) {
         We'll make sure You Get there.
       </Text>
       <Button
-        style={{ marginHorizontal: "2%", marginTop: "20%" }}
+        style={{ marginHorizontal: "2%", marginTop: "10%" }}
         status="primary"
         size="giant"
         accessoryRight={ArrowIcon}

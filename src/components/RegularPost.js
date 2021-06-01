@@ -11,10 +11,10 @@ function RegularPost({ style, onPress, budget, votes, description, title }) {
       <View>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View>
-            <Text category="p1" status="primary" style={{ fontWeight: "bold" }}>
+            <Text category="p2" status="primary" style={{ fontWeight: "bold" }}>
               Rs.{budget}
             </Text>
-            <Text category="h4" style={{ fontWeight: "bold" }}>
+            <Text category="h6" style={{ fontWeight: "bold" }}>
               {title}
             </Text>
           </View>
@@ -37,7 +37,7 @@ function RegularPost({ style, onPress, budget, votes, description, title }) {
           </View>
         </View>
         <Divider style={{ marginVertical: "2%" }} />
-        <Text category="p2" appearance="hint" style={{ fontWeight: "bold" }}>
+        <Text category="p3" appearance="hint" style={{ fontWeight: "bold" }}>
           {description}
         </Text>
       </View>

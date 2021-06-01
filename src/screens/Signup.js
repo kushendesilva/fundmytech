@@ -44,10 +44,10 @@ function Signup({ navigation }) {
       />
       <Image
         style={{
-          width: "35%",
-          height: "25%",
+          width: "28%",
+          height: "20%",
           alignSelf: "center",
-          marginVertical: "10%",
+          marginVertical: "5%",
         }}
         source={require("../assets/register.png")}
       />

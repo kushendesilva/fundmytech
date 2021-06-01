@@ -17,49 +17,49 @@ function Reminder({ navigation }) {
       />
       <Image
         style={{
-          width: "80%",
-          height: "40%",
+          width: "70%",
+          height: "35%",
           alignSelf: "center",
           marginVertical: "10%",
         }}
         source={require("../assets/reminder.png")}
       />
-      <Text category="h3" style={{ fontWeight: "bold", textAlign: "center" }}>
+      <Text category="h4" style={{ fontWeight: "bold", textAlign: "center" }}>
         Make Your Project
       </Text>
       <Text
-        category="h3"
+        category="h4"
         style={{ fontWeight: "bold", textAlign: "center", marginBottom: "2%" }}
       >
         Open Source
       </Text>
       <Text
-        category="p1"
+        category="p2"
         appearance="hint"
         style={{ fontWeight: "bold", textAlign: "center", marginBottom: "1%" }}
       >
         Help the community by making your Project
       </Text>
       <Text
-        category="p1"
+        category="p2"
         appearance="hint"
         style={{ fontWeight: "bold", textAlign: "center", marginBottom: "1%" }}
       >
         Open Source and Free to use with GitHub integration
       </Text>
       <Text
-        category="p1"
+        category="p2"
         appearance="hint"
         style={{ fontWeight: "bold", textAlign: "center", marginBottom: "1%" }}
       >
         (Not Required)
       </Text>
       <Button
-        style={{ marginHorizontal: "2%", marginTop: "21%" }}
+        style={{ marginHorizontal: "2%", marginTop: "10%" }}
         status="primary"
         size="giant"
         accessoryRight={CheckIcon}
-        onPress={() => navigation.navigate("HomeScreens")}
+        onPress={() => navigation.navigate("LoginScreen")}
       >
         Finish
       </Button>

@@ -15,7 +15,7 @@ function Home({ navigation }) {
       <FlatList
         ListHeaderComponent={() => (
           <Text
-            category="h3"
+            category="h4"
             status="primary"
             style={{
               fontWeight: "bold",
@@ -31,7 +31,7 @@ function Home({ navigation }) {
         )}
         ListFooterComponent={() => (
           <Text
-            category="h6"
+            category="p1"
             status="primary"
             style={{
               fontWeight: "bold",

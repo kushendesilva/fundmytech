@@ -35,7 +35,7 @@ function Settings({ navigation }) {
       />
       <Text
         status="primary"
-        category="h3"
+        category="h4"
         style={{
           fontWeight: "bold",
           textAlign: "center",
@@ -63,7 +63,7 @@ function Settings({ navigation }) {
                 appearance="ghost"
               />
               <Text category="h5" style={{ fontWeight: "bold" }}>
-                Push Notifications
+                Notifications
               </Text>
             </View>
             <Toggle checked={checked} onChange={onCheckedChange} />

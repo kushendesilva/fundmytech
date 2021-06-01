@@ -42,16 +42,16 @@ function Project({ navigation }) {
       <TopNavigation accessoryLeft={BackAction} title={Title} />
       <Image
         style={{
-          width: "64%",
-          height: "36%",
+          width: "48%",
+          height: "27%",
           alignSelf: "center",
-          marginVertical: "10%",
+          marginVertical: "5%",
         }}
         source={require("../assets/project.png")}
       />
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <Text
-          category="h4"
+          category="h5"
           style={{
             fontWeight: "bold",
             textAlign: "left",
@@ -115,7 +115,7 @@ function Project({ navigation }) {
         Rs.10,000
       </Text>
       <Button
-        style={{ marginHorizontal: "2%", marginTop: "8%" }}
+        style={{ marginHorizontal: "2%", marginTop: "5%" }}
         status="primary"
         size="giant"
         accessoryRight={GiftIcon}

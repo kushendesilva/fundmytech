@@ -19,7 +19,7 @@ function Account({ navigation }) {
       />
       <Text
         status="primary"
-        category="h3"
+        category="h4"
         style={{
           fontWeight: "bold",
           textAlign: "center",
