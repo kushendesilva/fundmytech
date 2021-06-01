@@ -6,7 +6,10 @@ function DeveloperPost({ style, onPress, budget, title, description, votes }) {
   const Heart = (props) => <Icon {...props} name="heart-outline" />;
 
   return (
-    <Card onPress={onPress} style={({ style }, { marginHorizontal: "2%" })}>
+    <Card
+      onPress={onPress}
+      style={({ style }, { marginHorizontal: "2%", elevation: 5 })}
+    >
       <View>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View>
@@ -17,8 +20,15 @@ function DeveloperPost({ style, onPress, budget, title, description, votes }) {
               {title}
             </Text>
           </View>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={{ alignSelf: "center", fontWeight: "bold" }}>
+          <View
+            style={{
+              flexDirection: "row",
+            }}
+          >
+            <Text
+              status="info"
+              style={{ alignSelf: "center", fontWeight: "bold" }}
+            >
               {votes}
             </Text>
             <Button
@@ -30,7 +40,7 @@ function DeveloperPost({ style, onPress, budget, title, description, votes }) {
           </View>
         </View>
         <Divider style={{ marginVertical: "2%" }} />
-        <Text category="p3" appearance="hint" style={{ fontWeight: "bold" }}>
+        <Text category="s2" appearance="hint" style={{ fontWeight: "bold" }}>
           {description}
         </Text>
       </View>

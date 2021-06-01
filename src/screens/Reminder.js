@@ -10,7 +10,7 @@ function Reminder({ navigation }) {
   );
 
   return (
-    <Layout style={{ flex: 1 }}>
+    <Layout style={{ flex: 1, justifyContent: "center" }}>
       <StatusBar
         backgroundColor={theme["color-primary-default"]}
         barStyle="light-content"
@@ -20,7 +20,7 @@ function Reminder({ navigation }) {
           width: "70%",
           height: "35%",
           alignSelf: "center",
-          marginVertical: "10%",
+          marginBottom: "10%",
         }}
         source={require("../assets/reminder.png")}
       />

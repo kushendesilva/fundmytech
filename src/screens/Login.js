@@ -32,28 +32,28 @@ function Login({ navigation }) {
   );
 
   return (
-    <Layout style={{ flex: 1 }}>
+    <Layout style={{ flex: 1, justifyContent: "center" }}>
       <StatusBar
         backgroundColor={theme["color-primary-default"]}
         barStyle="light-content"
       />
       <Image
         style={{
-          width: "36%",
-          height: "27%",
+          width: "32%",
+          height: "24%",
           alignSelf: "center",
-          marginVertical: "5%",
+          marginBottom: "5%",
         }}
         source={require("../assets/login.png")}
       />
       <Text
-        category="h3"
+        category="h4"
         style={{ fontWeight: "bold", textAlign: "center", marginBottom: "1%" }}
       >
         Login
       </Text>
       <Text
-        category="p1"
+        category="p2"
         style={{ fontWeight: "bold", textAlign: "center" }}
         appearance="hint"
       >

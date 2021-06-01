@@ -37,7 +37,7 @@ function Signup({ navigation }) {
   );
 
   return (
-    <Layout style={{ flex: 1 }}>
+    <Layout style={{ flex: 1, justifyContent: "center" }}>
       <StatusBar
         backgroundColor={theme["color-primary-default"]}
         barStyle="light-content"
@@ -47,18 +47,18 @@ function Signup({ navigation }) {
           width: "28%",
           height: "20%",
           alignSelf: "center",
-          marginVertical: "5%",
+          marginBottom: "5%",
         }}
         source={require("../assets/register.png")}
       />
       <Text
-        category="h3"
+        category="h4"
         style={{ fontWeight: "bold", textAlign: "center", marginBottom: "1%" }}
       >
         Signup
       </Text>
       <Text
-        category="p1"
+        category="p2"
         style={{ fontWeight: "bold", textAlign: "center", marginBottom: "2%" }}
         appearance="hint"
       >

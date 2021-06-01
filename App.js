@@ -98,7 +98,15 @@ export default () => {
 };
 
 const HomeScreens = (props) => (
-  <HomeStack.Navigator>
+  <HomeStack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: "#3366FF" },
+      headerTintColor: "white",
+      headerTitleStyle: {
+        fontWeight: "bold",
+      },
+    }}
+  >
     <HomeStack.Screen
       name="TabScreens"
       component={TabNavigator}
@@ -112,7 +120,6 @@ const HomeScreens = (props) => (
       component={Project}
       options={{
         title: "Project Details",
-        headerShown: false,
       }}
     />
   </HomeStack.Navigator>

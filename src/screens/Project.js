@@ -1,11 +1,4 @@
-import {
-  Layout,
-  Text,
-  Button,
-  Icon,
-  useTheme,
-  TopNavigation,
-} from "@ui-kitten/components";
+import { Layout, Text, Button, Icon, useTheme } from "@ui-kitten/components";
 import React from "react";
 import { Image, StatusBar, View } from "react-native";
 
@@ -15,37 +8,19 @@ function Project({ navigation }) {
   const UpVote = (props) => <Icon {...props} name="arrow-upward-outline" />;
   const DownVote = (props) => <Icon {...props} name="arrow-downward-outline" />;
   const GiftIcon = (props) => <Icon {...props} name="gift-outline" />;
-  const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
-
-  const BackAction = () => (
-    <Button
-      size="large"
-      status="primary"
-      appearance="ghost"
-      accessoryRight={BackIcon}
-      onPress={() => navigation.goBack()}
-    />
-  );
-
-  const Title = () => (
-    <Text category="h5" status="primary" style={{ fontWeight: "bold" }}>
-      Project Details
-    </Text>
-  );
 
   return (
-    <Layout style={{ flex: 1 }}>
+    <Layout style={{ flex: 1, justifyContent: "center" }}>
       <StatusBar
         backgroundColor={theme["color-primary-default"]}
         barStyle="light-content"
       />
-      <TopNavigation accessoryLeft={BackAction} title={Title} />
       <Image
         style={{
           width: "48%",
           height: "27%",
           alignSelf: "center",
-          marginVertical: "5%",
+          marginBottom: "5%",
         }}
         source={require("../assets/project.png")}
       />
