@@ -37,7 +37,7 @@ function RegularPost({ style, onPress, budget, votes, description, title }) {
           </View>
         </View>
         <Divider style={{ marginVertical: "2%" }} />
-        <Text category="p3" appearance="hint" style={{ fontWeight: "bold" }}>
+        <Text category="s2" appearance="hint" style={{ fontWeight: "bold" }}>
           {description}
         </Text>
       </View>
