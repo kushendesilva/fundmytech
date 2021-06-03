@@ -1,39 +1,65 @@
-import { Layout, Icon, Text, useTheme } from "@ui-kitten/components";
+import { Icon, Text } from "@ui-kitten/components";
+import { FlatList, View } from "react-native";
 import React from "react";
-import { StatusBar } from "react-native";
-import AccountTabs from "../components/AccountTabs";
+import Screen from "../components/Screen";
+import ExtendedButton from "../components/ExtendedButton";
 
 function Account({ navigation }) {
-  const theme = useTheme();
-
   const AccountIcon = (props) => <Icon {...props} name="person-outline" />;
   const PayPalIcon = (props) => <Icon {...props} name="credit-card-outline" />;
   const EarningsIcon = (props) => <Icon {...props} name="briefcase-outline" />;
   const InsightsIcon = (props) => <Icon {...props} name="activity-outline" />;
 
-  return (
-    <Layout style={{ flex: 1 }}>
-      <StatusBar
-        backgroundColor={theme["color-primary-default"]}
-        barStyle="light-content"
-      />
-      <Text
-        status="primary"
-        category="h4"
-        style={{
-          fontWeight: "bold",
-          textAlign: "center",
-          marginVertical: "2%",
-        }}
-      >
-        Account
-      </Text>
+  const AccountItems = [
+    {
+      onPress: () => navigation.navigate("InfoScreen"),
+      title: "Account Information",
+      tabIcon: AccountIcon,
+    },
+    {
+      title: "PayPal",
+      tabIcon: PayPalIcon,
+    },
+    {
+      onPress: () => navigation.navigate("EarningScreen"),
+      title: "Earnings",
+      tabIcon: EarningsIcon,
+    },
+    {
+      onPress: () => navigation.navigate("InsightScreen"),
+      title: "Insights",
+      tabIcon: InsightsIcon,
+    },
+  ];
 
-      <AccountTabs title="Account Information" tabIcon={AccountIcon} />
-      <AccountTabs title="PayPal" tabIcon={PayPalIcon} />
-      <AccountTabs title="Earnings" tabIcon={EarningsIcon} />
-      <AccountTabs title="Insights" tabIcon={InsightsIcon} />
-    </Layout>
+  return (
+    <Screen>
+      <FlatList
+        ListHeaderComponent={() => (
+          <Text
+            category="h4"
+            status="primary"
+            style={{
+              fontWeight: "bold",
+              textAlign: "center",
+              marginVertical: "2%",
+            }}
+          >
+            Account
+          </Text>
+        )}
+        ItemSeparatorComponent={() => <View style={{ marginVertical: "2%" }} />}
+        data={AccountItems}
+        keyExtractor={(account) => account.title}
+        renderItem={({ item }) => (
+          <ExtendedButton
+            title={item.title}
+            tabIcon={item.tabIcon}
+            onPress={item.onPress}
+          />
+        )}
+      />
+    </Screen>
   );
 }
 

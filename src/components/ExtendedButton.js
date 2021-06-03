@@ -2,12 +2,12 @@ import React from "react";
 import { Button, Text, Card, Icon } from "@ui-kitten/components";
 import { View } from "react-native";
 
-function AccountTabs({ tabIcon, title, onPress }) {
+function ExtendedButton({ tabIcon, title, onPress }) {
   const ArrowIcon = (props) => (
     <Icon {...props} name="arrow-ios-forward-outline" />
   );
   return (
-    <Card onPress={onPress} style={{ margin: "2%" }}>
+    <Card onPress={onPress} style={{ marginHorizontal: "2%" }}>
       <View>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View
@@ -39,4 +39,4 @@ function AccountTabs({ tabIcon, title, onPress }) {
   );
 }
 
-export default AccountTabs;
+export default ExtendedButton;

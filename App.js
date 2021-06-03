@@ -20,6 +20,9 @@ import Project from "./src/screens/Project";
 import Account from "./src/screens/Account";
 import Home from "./src/screens/Home";
 import Settings from "./src/screens/Settings";
+import Earnings from "./src/screens/Earnings";
+import AccountInfo from "./src/screens/AccountInfo";
+import Insights from "./src/screens/Insights";
 
 const MainStack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -113,6 +116,27 @@ const HomeScreens = (props) => (
       options={{
         title: "Home",
         headerShown: false,
+      }}
+    />
+    <HomeStack.Screen
+      name="InfoScreen"
+      component={AccountInfo}
+      options={{
+        title: "Account Information",
+      }}
+    />
+    <HomeStack.Screen
+      name="EarningScreen"
+      component={Earnings}
+      options={{
+        title: "Project Earnings",
+      }}
+    />
+    <HomeStack.Screen
+      name="InsightScreen"
+      component={Insights}
+      options={{
+        title: "Project Insights",
       }}
     />
     <HomeStack.Screen

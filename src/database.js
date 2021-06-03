@@ -1,4 +1,4 @@
-export default Posts = [
+export const Posts = [
   {
     id: 123,
     title: "Lorem Ipsum - 1",
@@ -48,3 +48,9 @@ export default Posts = [
     budget: 100000,
   },
 ];
+
+export const Users = {
+  id: 123,
+  type: "Donator",
+  name: "Lorem ipsum",
+};

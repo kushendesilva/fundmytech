@@ -9,7 +9,7 @@ function RegularPost({ style, onPress, budget, votes, description, title }) {
   return (
     <Card
       onPress={onPress}
-      style={({ style }, { marginHorizontal: "2%", elevation: 5 })}
+      style={({ style }, { marginHorizontal: "2%", borderRadius: 10 })}
     >
       <View>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>

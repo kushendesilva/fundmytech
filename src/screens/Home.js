@@ -1,17 +1,15 @@
-import { Layout, useTheme, Text } from "@ui-kitten/components";
+import { Text } from "@ui-kitten/components";
 import React from "react";
-import { StatusBar, FlatList, View } from "react-native";
+import { FlatList, View } from "react-native";
+import Screen from "../components/Screen";
 import RegularPost from "../components/RegularPost";
-import Posts from "../Posts";
+import DeveloperPost from "../components/DeveloperPost";
+import RenderIf from "../components/RenderIf";
+import { Posts, Users } from "../database";
 
 function Home({ navigation }) {
-  const theme = useTheme();
   return (
-    <Layout style={{ flex: 1 }}>
-      <StatusBar
-        backgroundColor={theme["color-primary-default"]}
-        barStyle="light-content"
-      />
+    <Screen>
       <FlatList
         ListHeaderComponent={() => (
           <Text
@@ -45,16 +43,31 @@ function Home({ navigation }) {
         data={Posts}
         keyExtractor={(post) => post.id.toString()}
         renderItem={({ item }) => (
-          <RegularPost
-            onPress={() => navigation.navigate("ProjectScreen")}
-            title={item.title}
-            votes={item.votes}
-            description={item.description}
-            budget={item.budget}
-          />
+          <>
+            {RenderIf(
+              Users.type == "Donator",
+              <RegularPost
+                onPress={() => navigation.navigate("ProjectScreen")}
+                title={item.title}
+                votes={item.votes}
+                description={item.description}
+                budget={item.budget}
+              />
+            )}
+            {RenderIf(
+              Users.type == "Developer",
+              <DeveloperPost
+                onPress={() => navigation.navigate("ProjectScreen")}
+                title={item.title}
+                votes={item.votes}
+                description={item.description}
+                budget={item.budget}
+              />
+            )}
+          </>
         )}
       />
-    </Layout>
+    </Screen>
   );
 }
 

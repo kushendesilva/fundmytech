@@ -1,5 +1,4 @@
 import {
-  Layout,
   Button,
   Icon,
   Input,
@@ -7,19 +6,19 @@ import {
   Select,
   SelectItem,
   IndexPath,
-  useTheme,
 } from "@ui-kitten/components";
 import React from "react";
-import { Image, StatusBar, TouchableWithoutFeedback } from "react-native";
+import { Image, TouchableWithoutFeedback } from "react-native";
+import Screen from "../components/Screen";
 
 function Signup({ navigation }) {
-  const theme = useTheme();
-
   const types = ["Developer", "Donator"];
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
   const accountType = types[selectedIndex.row];
 
-  const renderOption = (title) => <SelectItem title={title} />;
+  const renderOption = (title) => (
+    <SelectItem key={accountType} title={title} />
+  );
 
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -37,11 +36,7 @@ function Signup({ navigation }) {
   );
 
   return (
-    <Layout style={{ flex: 1, justifyContent: "center" }}>
-      <StatusBar
-        backgroundColor={theme["color-primary-default"]}
-        barStyle="light-content"
-      />
+    <Screen>
       <Image
         style={{
           width: "28%",
@@ -120,7 +115,7 @@ function Signup({ navigation }) {
       >
         Login
       </Button>
-    </Layout>
+    </Screen>
   );
 }
 

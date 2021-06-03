@@ -1,20 +1,15 @@
-import { Layout, Text, Button, Icon, useTheme } from "@ui-kitten/components";
+import { Text, Button, Icon } from "@ui-kitten/components";
 import React from "react";
-import { Image, StatusBar, View } from "react-native";
+import { Image, View } from "react-native";
+import Screen from "../components/Screen";
 
 function Project({ navigation }) {
-  const theme = useTheme();
-
   const UpVote = (props) => <Icon {...props} name="arrow-upward-outline" />;
   const DownVote = (props) => <Icon {...props} name="arrow-downward-outline" />;
   const GiftIcon = (props) => <Icon {...props} name="gift-outline" />;
 
   return (
-    <Layout style={{ flex: 1, justifyContent: "center" }}>
-      <StatusBar
-        backgroundColor={theme["color-primary-default"]}
-        barStyle="light-content"
-      />
+    <Screen>
       <Image
         style={{
           width: "48%",
@@ -97,7 +92,7 @@ function Project({ navigation }) {
       >
         Donate
       </Button>
-    </Layout>
+    </Screen>
   );
 }
 

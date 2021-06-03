@@ -1,18 +1,9 @@
-import {
-  Layout,
-  Button,
-  Icon,
-  Input,
-  Text,
-  ButtonGroup,
-  useTheme,
-} from "@ui-kitten/components";
+import { Button, Icon, Input, Text, ButtonGroup } from "@ui-kitten/components";
 import React from "react";
-import { Image, StatusBar, TouchableWithoutFeedback } from "react-native";
+import { Image, TouchableWithoutFeedback } from "react-native";
+import Screen from "../components/Screen";
 
 function Login({ navigation }) {
-  const theme = useTheme();
-
   const FacebookIcon = (props) => <Icon {...props} name="facebook-outline" />;
   const GoogleIcon = (props) => <Icon {...props} name="google-outline" />;
   const TwitterIcon = (props) => <Icon {...props} name="twitter-outline" />;
@@ -32,11 +23,7 @@ function Login({ navigation }) {
   );
 
   return (
-    <Layout style={{ flex: 1, justifyContent: "center" }}>
-      <StatusBar
-        backgroundColor={theme["color-primary-default"]}
-        barStyle="light-content"
-      />
+    <Screen>
       <Image
         style={{
           width: "32%",
@@ -102,7 +89,7 @@ function Login({ navigation }) {
       >
         Sign up
       </Button>
-    </Layout>
+    </Screen>
   );
 }
 
