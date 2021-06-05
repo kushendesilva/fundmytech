@@ -2,11 +2,15 @@ import { Text, Button, Icon } from "@ui-kitten/components";
 import React from "react";
 import { Image, View } from "react-native";
 import Screen from "../components/Screen";
+import RenderIf from "../components/RenderIf";
+import { Users } from "../database";
 
 function Project({ navigation }) {
   const UpVote = (props) => <Icon {...props} name="arrow-upward-outline" />;
   const DownVote = (props) => <Icon {...props} name="arrow-downward-outline" />;
   const GiftIcon = (props) => <Icon {...props} name="gift-outline" />;
+  const BinIcon = (props) => <Icon {...props} name="trash-2-outline" />;
+  const HeartIcon = (props) => <Icon {...props} name="heart-outline" />;
 
   return (
     <Screen>
@@ -31,21 +35,45 @@ function Project({ navigation }) {
         >
           Lorem Ipsum
         </Text>
-        <View style={{ flexDirection: "row" }}>
-          <Button
-            accessoryLeft={UpVote}
-            size="small"
-            status="success"
-            appearance="ghost"
-          />
-          <Text style={{ alignSelf: "center", fontWeight: "bold" }}>150</Text>
-          <Button
-            accessoryLeft={DownVote}
-            size="small"
-            status="danger"
-            appearance="ghost"
-          />
-        </View>
+        {RenderIf(
+          Users.type == "Developer",
+          <View
+            style={{
+              flexDirection: "row",
+            }}
+          >
+            <Text
+              status="info"
+              style={{ alignSelf: "center", fontWeight: "bold" }}
+            >
+              100
+            </Text>
+            <Button
+              accessoryLeft={HeartIcon}
+              size="small"
+              status="danger"
+              appearance="ghost"
+            />
+          </View>
+        )}
+        {RenderIf(
+          Users.type == "Donator",
+          <View style={{ flexDirection: "row" }}>
+            <Button
+              accessoryLeft={UpVote}
+              size="small"
+              status="success"
+              appearance="ghost"
+            />
+            <Text style={{ alignSelf: "center", fontWeight: "bold" }}>150</Text>
+            <Button
+              accessoryLeft={DownVote}
+              size="small"
+              status="danger"
+              appearance="ghost"
+            />
+          </View>
+        )}
       </View>
       <Text
         category="p1"
@@ -84,14 +112,28 @@ function Project({ navigation }) {
       >
         Rs.10,000
       </Text>
-      <Button
-        style={{ marginHorizontal: "2%", marginTop: "5%" }}
-        status="primary"
-        size="giant"
-        accessoryRight={GiftIcon}
-      >
-        Donate
-      </Button>
+      {RenderIf(
+        Users.type == "Donator",
+        <Button
+          style={{ marginHorizontal: "2%", marginTop: "5%" }}
+          status="primary"
+          size="giant"
+          accessoryRight={GiftIcon}
+        >
+          Donate
+        </Button>
+      )}
+      {RenderIf(
+        Users.type == "Developer",
+        <Button
+          style={{ marginHorizontal: "2%", marginTop: "5%" }}
+          status="danger"
+          size="giant"
+          accessoryRight={BinIcon}
+        >
+          Delete
+        </Button>
+      )}
     </Screen>
   );
 }
