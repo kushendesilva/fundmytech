@@ -3,6 +3,7 @@ import { View, TouchableNativeFeedback } from "react-native";
 import { Input, Button, Layout, Icon } from "@ui-kitten/components";
 import RenderIf from "../components/RenderIf";
 import { Users } from "../database";
+import ScreenVariant from "../components/ScreenVariant";
 
 function AppEditShop(props) {
   const [name, setName] = useState(Users.name);
@@ -26,7 +27,7 @@ function AppEditShop(props) {
   const SaveIcon = (props) => <Icon {...props} name="save-outline" />;
 
   return (
-    <Layout style={{ flex: 1 }}>
+    <ScreenVariant>
       <View style={{ padding: 10 }}>
         <Input
           style={{ marginHorizontal: "2%", marginVertical: "1%" }}
@@ -107,7 +108,7 @@ function AppEditShop(props) {
           </View>
         )}
       </View>
-    </Layout>
+    </ScreenVariant>
   );
 }
 
