@@ -1,34 +1,13 @@
 import React from "react";
 import ScreenVariant from "../components/ScreenVariant";
-import {
-  Text,
-  useTheme,
-  Datepicker,
-  NativeDateService,
-} from "@ui-kitten/components";
-import { BarChart } from "react-native-chart-kit";
+import { Text, useTheme } from "@ui-kitten/components";
+import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { ThemeContext } from "../theme";
 import RenderIf from "../components/RenderIf";
-import { EarningsData } from "../database";
+import { InsightsData } from "../database";
 
-function Earnings(props) {
-  const MyDate = new Date();
-
-  MyDate.setDate(MyDate.getDate());
-
-  const MyDateString =
-    ("0" + (MyDate.getMonth() + 1)).slice(-2) +
-    "/" +
-    ("0" + MyDate.getDate()).slice(-2) +
-    "/" +
-    MyDate.getFullYear().toString().substr(-2);
-
-  const formatDateService = new NativeDateService("en", {
-    format: "MM/DD/YYYY",
-  });
-  const [date, setDate] = React.useState(new Date());
-  const selectedDate = date.toLocaleDateString("en-GB");
+function InsightDetails(props) {
   const theme = useTheme();
   const themeContext = React.useContext(ThemeContext);
 
@@ -71,18 +50,19 @@ function Earnings(props) {
           marginHorizontal: "3%",
         }}
       >
-        January
+        Views
       </Text>
 
       {RenderIf(
         themeContext.theme == "light",
-        <BarChart
+        <LineChart
           data={{
-            labels: EarningsData.Labels,
-            datasets: EarningsData.Datasets,
+            labels: InsightsData.Labels,
+            datasets: InsightsData.Datasets,
           }}
           width={Dimensions.get("window").width - 20}
           height={220}
+          yAxisSuffix="k"
           yAxisInterval={1}
           chartConfig={chartConfigLight}
           bezier
@@ -94,13 +74,14 @@ function Earnings(props) {
       )}
       {RenderIf(
         themeContext.theme == "dark",
-        <BarChart
+        <LineChart
           data={{
-            labels: EarningsData.Labels,
-            datasets: EarningsData.Datasets,
+            labels: InsightsData.Labels,
+            datasets: InsightsData.Datasets,
           }}
           width={Dimensions.get("window").width - 20}
           height={220}
+          yAxisSuffix="k"
           yAxisInterval={1}
           chartConfig={chartConfigDark}
           bezier
@@ -110,26 +91,58 @@ function Earnings(props) {
           }}
         />
       )}
+
       <Text
-        style={{ textAlign: "center", marginTop: "5%", fontWeight: "bold" }}
-        category="h6"
+        category="h5"
+        style={{
+          fontWeight: "bold",
+          textAlign: "center",
+          marginVertical: "2%",
+          marginHorizontal: "3%",
+        }}
       >
-        Selected date: {selectedDate}
+        Likes
       </Text>
-      <Datepicker
-        style={{ margin: "2%" }}
-        date={date}
-        onSelect={(nextDate) => setDate(nextDate)}
-        dateService={formatDateService}
-      />
-      <Text
-        style={{ textAlign: "center", marginTop: "5%", fontWeight: "bold" }}
-        category="h6"
-      >
-        Today: {MyDateString}
-      </Text>
+      {RenderIf(
+        themeContext.theme == "light",
+        <LineChart
+          data={{
+            labels: InsightsData.Labels,
+            datasets: InsightsData.Datasets,
+          }}
+          width={Dimensions.get("window").width - 20}
+          height={220}
+          yAxisSuffix="k"
+          yAxisInterval={1}
+          chartConfig={chartConfigLight}
+          bezier
+          style={{
+            borderRadius: 16,
+            alignSelf: "center",
+          }}
+        />
+      )}
+      {RenderIf(
+        themeContext.theme == "dark",
+        <LineChart
+          data={{
+            labels: InsightsData.Labels,
+            datasets: InsightsData.Datasets,
+          }}
+          width={Dimensions.get("window").width - 20}
+          height={220}
+          yAxisSuffix="k"
+          yAxisInterval={1}
+          chartConfig={chartConfigDark}
+          bezier
+          style={{
+            borderRadius: 16,
+            alignSelf: "center",
+          }}
+        />
+      )}
     </ScreenVariant>
   );
 }
 
-export default Earnings;
+export default InsightDetails;

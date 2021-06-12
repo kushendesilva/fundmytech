@@ -11,7 +11,7 @@ function Home({ navigation }) {
   const PersonIcon = (props) => <Icon {...props} name="person-outline" />;
   const NewIcon = (props) => <Icon {...props} name="trending-up-outline" />;
 
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   return (
     <Screen>

@@ -55,3 +55,27 @@ export const Users = {
   name: "Lorem Ipsum",
   email: "lorem@ipsum.com",
 };
+
+export const InsightsData = {
+  Labels: ["January", "February", "March", "April", "May", "June"],
+  Datasets: [
+    {
+      data: [100, 200, 300, 50, 550, 150],
+    },
+  ],
+};
+
+export const EarningsData = {
+  Labels: [
+    "Project - 1",
+    "Project - 2",
+    "Project - 3",
+    "Project - 4",
+    "Project - 5",
+  ],
+  Datasets: [
+    {
+      data: [1000, 2000, 3000, 500, 5500],
+    },
+  ],
+};

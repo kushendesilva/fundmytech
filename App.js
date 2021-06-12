@@ -23,6 +23,7 @@ import Settings from "./src/screens/Settings";
 import Earnings from "./src/screens/Earnings";
 import AccountInfo from "./src/screens/AccountInfo";
 import Insights from "./src/screens/Insights";
+import InsightDetails from "./src/screens/InsightDetails";
 
 const MainStack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -135,6 +136,13 @@ const HomeScreens = (props) => (
     <HomeStack.Screen
       name="InsightScreen"
       component={Insights}
+      options={{
+        title: "Projects",
+      }}
+    />
+    <HomeStack.Screen
+      name="InsightDetails"
+      component={InsightDetails}
       options={{
         title: "Project Insights",
       }}
