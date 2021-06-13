@@ -8,7 +8,9 @@ function DeveloperPost({ style, onPress, budget, title, description, votes }) {
   return (
     <Card
       onPress={onPress}
-      style={({ style }, { marginHorizontal: "2%", borderRadius: 10 })}
+      style={
+        ({ style }, { marginHorizontal: "2%", borderRadius: 10, elevation: 2 })
+      }
     >
       <View>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
