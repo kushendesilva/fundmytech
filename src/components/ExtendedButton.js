@@ -7,7 +7,7 @@ function ExtendedButton({ tabIcon, title, onPress }) {
     <Icon {...props} name="arrow-ios-forward-outline" />
   );
   return (
-    <Card onPress={onPress} style={{ marginHorizontal: "2%" }}>
+    <Card onPress={onPress} style={{ margin: "2%" }}>
       <View>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View

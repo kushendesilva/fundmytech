@@ -1,7 +1,6 @@
 import { Icon, Text } from "@ui-kitten/components";
 import React from "react";
-import { View, FlatList } from "react-native";
-import Screen from "../components/Screen";
+import ScreenVariant from "../components/ScreenVariant";
 import ExtendedButton from "../components/ExtendedButton";
 import { ThemeContext } from "../theme";
 
@@ -12,51 +11,31 @@ function Settings({ navigation }) {
   const DarkIcon = (props) => <Icon {...props} name="moon-outline" />;
   const BellIcon = (props) => <Icon {...props} name="bell-outline" />;
 
-  const SettingsItems = [
-    {
-      onPress: themeContext.toggleTheme,
-      title: "Dark Mode",
-      tabIcon: DarkIcon,
-    },
-    {
-      title: "Notifications",
-      tabIcon: BellIcon,
-    },
-    {
-      onPress: () => navigation.navigate("LoginScreen"),
-      title: "Log Out",
-      tabIcon: LogOutIcon,
-    },
-  ];
-
   return (
-    <Screen>
-      <FlatList
-        ListHeaderComponent={() => (
-          <Text
-            category="h4"
-            status="primary"
-            style={{
-              fontWeight: "bold",
-              textAlign: "center",
-              marginVertical: "2%",
-            }}
-          >
-            Settings
-          </Text>
-        )}
-        ItemSeparatorComponent={() => <View style={{ marginVertical: "2%" }} />}
-        data={SettingsItems}
-        keyExtractor={(settings) => settings.title}
-        renderItem={({ item }) => (
-          <ExtendedButton
-            title={item.title}
-            tabIcon={item.tabIcon}
-            onPress={item.onPress}
-          />
-        )}
+    <ScreenVariant>
+      <Text
+        category="h4"
+        status="primary"
+        style={{
+          fontWeight: "bold",
+          textAlign: "center",
+          marginVertical: "2%",
+        }}
+      >
+        Settings
+      </Text>
+      <ExtendedButton
+        title="Dark Mode"
+        tabIcon={DarkIcon}
+        onPress={themeContext.toggleTheme}
       />
-    </Screen>
+      <ExtendedButton title="Notifications" tabIcon={BellIcon} />
+      <ExtendedButton
+        title="Log Out"
+        tabIcon={LogOutIcon}
+        onPress={() => navigation.navigate("LoginScreen")}
+      />
+    </ScreenVariant>
   );
 }
 

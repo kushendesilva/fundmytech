@@ -1,65 +1,58 @@
 import { Icon, Text } from "@ui-kitten/components";
-import { FlatList, View } from "react-native";
 import React from "react";
-import Screen from "../components/Screen";
+import ScreenVariant from "../components/ScreenVariant";
 import ExtendedButton from "../components/ExtendedButton";
+import RenderIf from "../components/RenderIf";
+import { Users } from "../database";
 
 function Account({ navigation }) {
   const AccountIcon = (props) => <Icon {...props} name="person-outline" />;
   const PayPalIcon = (props) => <Icon {...props} name="credit-card-outline" />;
   const EarningsIcon = (props) => <Icon {...props} name="briefcase-outline" />;
   const InsightsIcon = (props) => <Icon {...props} name="activity-outline" />;
-
-  const AccountItems = [
-    {
-      onPress: () => navigation.navigate("InfoScreen"),
-      title: "Account Information",
-      tabIcon: AccountIcon,
-    },
-    {
-      title: "PayPal",
-      tabIcon: PayPalIcon,
-    },
-    {
-      onPress: () => navigation.navigate("EarningScreen"),
-      title: "Earnings",
-      tabIcon: EarningsIcon,
-    },
-    {
-      onPress: () => navigation.navigate("InsightScreen"),
-      title: "Insights",
-      tabIcon: InsightsIcon,
-    },
-  ];
+  const PlusIcon = (props) => <Icon {...props} name="plus-circle-outline" />;
 
   return (
-    <Screen>
-      <FlatList
-        ListHeaderComponent={() => (
-          <Text
-            category="h4"
-            status="primary"
-            style={{
-              fontWeight: "bold",
-              textAlign: "center",
-              marginVertical: "2%",
-            }}
-          >
-            Account
-          </Text>
-        )}
-        ItemSeparatorComponent={() => <View style={{ marginVertical: "2%" }} />}
-        data={AccountItems}
-        keyExtractor={(account) => account.title}
-        renderItem={({ item }) => (
-          <ExtendedButton
-            title={item.title}
-            tabIcon={item.tabIcon}
-            onPress={item.onPress}
-          />
-        )}
+    <ScreenVariant>
+      <Text
+        category="h4"
+        status="primary"
+        style={{
+          fontWeight: "bold",
+          textAlign: "center",
+          marginVertical: "2%",
+        }}
+      >
+        Account
+      </Text>
+      <ExtendedButton
+        title="Account Information"
+        tabIcon={AccountIcon}
+        onPress={() => navigation.navigate("InfoScreen")}
       />
-    </Screen>
+      <ExtendedButton title="PayPal" tabIcon={PayPalIcon} />
+
+      {RenderIf(
+        Users.type == "Developer",
+        <>
+          <ExtendedButton
+            title="New Project"
+            tabIcon={PlusIcon}
+            onPress={() => navigation.navigate("NewProject")}
+          />
+          <ExtendedButton
+            title="Earnings"
+            tabIcon={EarningsIcon}
+            onPress={() => navigation.navigate("EarningScreen")}
+          />
+          <ExtendedButton
+            title="Insights"
+            tabIcon={InsightsIcon}
+            onPress={() => navigation.navigate("InsightScreen")}
+          />
+        </>
+      )}
+    </ScreenVariant>
   );
 }
 

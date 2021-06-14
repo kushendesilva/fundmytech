@@ -24,6 +24,7 @@ import Earnings from "./src/screens/Earnings";
 import AccountInfo from "./src/screens/AccountInfo";
 import Insights from "./src/screens/Insights";
 import InsightDetails from "./src/screens/InsightDetails";
+import NewProject from "./src/screens/NewProject";
 
 const MainStack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -33,7 +34,7 @@ const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
 const SettingsIcon = (props) => <Icon {...props} name="settings-outline" />;
 
 export default () => {
-  const [theme, setTheme] = React.useState("light");
+  const [theme, setTheme] = React.useState("dark");
 
   const toggleTheme = () => {
     const nextTheme = theme === "light" ? "dark" : "light";
@@ -117,6 +118,13 @@ const HomeScreens = (props) => (
       options={{
         title: "Home",
         headerShown: false,
+      }}
+    />
+    <HomeStack.Screen
+      name="NewProject"
+      component={NewProject}
+      options={{
+        title: "New Project",
       }}
     />
     <HomeStack.Screen
