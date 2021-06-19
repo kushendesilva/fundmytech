@@ -3,6 +3,7 @@ import React from "react";
 import ScreenVariant from "../components/ScreenVariant";
 import ExtendedButton from "../components/ExtendedButton";
 import { ThemeContext } from "../theme";
+import { firebase } from "../firebase";
 
 function Settings({ navigation }) {
   const themeContext = React.useContext(ThemeContext);
@@ -33,7 +34,19 @@ function Settings({ navigation }) {
       <ExtendedButton
         title="Log Out"
         tabIcon={LogOutIcon}
-        onPress={() => navigation.navigate("LoginScreen")}
+        onPress={() => {
+          firebase
+            .auth()
+            .signOut()
+            .then(
+              () => {
+                navigation.navigate("LoginScreen");
+              },
+              function (error) {
+                // An error happened.
+              }
+            );
+        }}
       />
     </ScreenVariant>
   );

@@ -1,9 +1,41 @@
 import { Button, Icon, Input, Text, ButtonGroup } from "@ui-kitten/components";
-import React from "react";
+import React, { useState } from "react";
 import { Image, TouchableWithoutFeedback } from "react-native";
 import Screen from "../components/Screen";
+import { firebase } from "../firebase";
 
 function Login({ navigation }) {
+  const onLoginPress = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email.toLowerCase(), password)
+      .then((response) => {
+        const uid = response.user.uid;
+        const usersRef = firebase.firestore().collection("users");
+        usersRef
+          .doc(uid)
+          .get()
+          .then((firestoreDocument) => {
+            if (!firestoreDocument.exists) {
+              alert("User does not exist anymore.");
+              return;
+            }
+            const user = firestoreDocument.data();
+            // navigation.navigate("InfoScreen", { user: user });
+            navigation.navigate("TabScreens", {
+              screen: "HomeScreen",
+              params: { user: user },
+            });
+          })
+          .catch((error) => {
+            alert(error);
+          });
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
   const FacebookIcon = (props) => <Icon {...props} name="facebook-outline" />;
   const GoogleIcon = (props) => <Icon {...props} name="google-outline" />;
   const TwitterIcon = (props) => <Icon {...props} name="twitter-outline" />;
@@ -78,7 +110,7 @@ function Login({ navigation }) {
         style={{ marginHorizontal: "2%" }}
         status="primary"
         size="giant"
-        onPress={() => navigation.navigate("HomeScreens")}
+        onPress={() => onLoginPress()}
       >
         Login
       </Button>

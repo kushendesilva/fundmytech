@@ -7,10 +7,10 @@ import DeveloperPost from "../components/DeveloperPost";
 import RenderIf from "../components/RenderIf";
 import { Posts, Users } from "../database";
 
-function Home({ navigation }) {
+function Home({ navigation, route }) {
   const PersonIcon = (props) => <Icon {...props} name="person-outline" />;
   const NewIcon = (props) => <Icon {...props} name="trending-up-outline" />;
-
+  const { user } = route.params;
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   return (
@@ -19,7 +19,7 @@ function Home({ navigation }) {
         ListHeaderComponent={() => (
           <View style={{ marginBottom: "2%" }}>
             {RenderIf(
-              Users.type == "Donator",
+              user.type == "Donator",
               <Text
                 category="h4"
                 status="primary"
@@ -33,7 +33,7 @@ function Home({ navigation }) {
               </Text>
             )}
             {RenderIf(
-              Users.type == "Developer",
+              user.type == "Developer",
               <TabBar
                 selectedIndex={selectedIndex}
                 onSelect={(index) => setSelectedIndex(index)}
@@ -65,7 +65,7 @@ function Home({ navigation }) {
         renderItem={({ item }) => (
           <>
             {RenderIf(
-              Users.type == "Donator",
+              user.type == "Donator",
               <RegularPost
                 onPress={() => navigation.navigate("ProjectScreen")}
                 title={item.title}
@@ -75,7 +75,7 @@ function Home({ navigation }) {
               />
             )}
             {RenderIf(
-              Users.type == "Developer",
+              user.type == "Developer",
               <>
                 {RenderIf(
                   selectedIndex == 0,
