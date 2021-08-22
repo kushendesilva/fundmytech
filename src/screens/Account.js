@@ -33,7 +33,7 @@ function Account({ navigation }) {
       <ExtendedButton title="PayPal" tabIcon={PayPalIcon} />
 
       {RenderIf(
-        Users.type == "Developer",
+        Users.developer == true,
         <>
           <ExtendedButton
             title="New Project"

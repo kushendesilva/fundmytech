@@ -5,7 +5,8 @@ import Screen from "../components/Screen";
 import RegularPost from "../components/RegularPost";
 import DeveloperPost from "../components/DeveloperPost";
 import RenderIf from "../components/RenderIf";
-import { Posts, Users } from "../database";
+import { Posts } from "../database";
+import { firebase } from "../firebase";
 
 function Home({ navigation, route }) {
   const PersonIcon = (props) => <Icon {...props} name="person-outline" />;
@@ -13,13 +14,34 @@ function Home({ navigation, route }) {
   const { user } = route.params;
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
+  const [posts, setPosts] = React.useState([]);
+
+  const postRef = firebase.firestore().collection("posts");
+
+  React.useEffect(() => {
+    postRef.onSnapshot(
+      (querySnapshot) => {
+        const newPosts = [];
+        querySnapshot.forEach((doc) => {
+          const post = doc.data();
+          post.id = doc.id;
+          newPosts.push(post);
+        });
+        setPosts(newPosts);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
+
   return (
     <Screen>
       <FlatList
         ListHeaderComponent={() => (
           <View style={{ marginBottom: "2%" }}>
             {RenderIf(
-              user.type == "Donator",
+              user.developer == "Donator",
               <Text
                 category="h4"
                 status="primary"
@@ -33,7 +55,7 @@ function Home({ navigation, route }) {
               </Text>
             )}
             {RenderIf(
-              user.type == "Developer",
+              user.developer == true,
               <TabBar
                 selectedIndex={selectedIndex}
                 onSelect={(index) => setSelectedIndex(index)}
@@ -60,14 +82,25 @@ function Home({ navigation, route }) {
             You Reached the End
           </Text>
         )}
-        data={Posts}
+        data={posts}
         keyExtractor={(post) => post.id.toString()}
         renderItem={({ item }) => (
           <>
             {RenderIf(
               user.type == "Donator",
               <RegularPost
-                onPress={() => navigation.navigate("ProjectScreen")}
+                onPress={() =>
+                  navigation.navigate("ProjectScreen", {
+                    data: {
+                      user: user,
+                      remove: false,
+                      title: item.title,
+                      votes: item.votes,
+                      description: item.description,
+                      budget: item.budget,
+                    },
+                  })
+                }
                 title={item.title}
                 votes={item.votes}
                 description={item.description}
@@ -75,12 +108,23 @@ function Home({ navigation, route }) {
               />
             )}
             {RenderIf(
-              user.type == "Developer",
+              user.developer == true,
               <>
                 {RenderIf(
                   selectedIndex == 0,
                   <RegularPost
-                    onPress={() => navigation.navigate("ProjectScreen")}
+                    onPress={() =>
+                      navigation.navigate("ProjectScreen", {
+                        data: {
+                          user: user,
+                          remove: false,
+                          title: item.title,
+                          votes: item.votes,
+                          description: item.description,
+                          budget: item.budget,
+                        },
+                      })
+                    }
                     title={item.title}
                     votes={item.votes}
                     description={item.description}
@@ -90,7 +134,18 @@ function Home({ navigation, route }) {
                 {RenderIf(
                   selectedIndex == 1,
                   <DeveloperPost
-                    onPress={() => navigation.navigate("ProjectScreen")}
+                    onPress={() =>
+                      navigation.navigate("ProjectScreen", {
+                        data: {
+                          user: user,
+                          remove: true,
+                          title: item.title,
+                          votes: item.votes,
+                          description: item.description,
+                          budget: item.budget,
+                        },
+                      })
+                    }
                     title={item.title}
                     votes={item.votes}
                     description={item.description}

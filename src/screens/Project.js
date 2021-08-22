@@ -5,12 +5,13 @@ import Screen from "../components/Screen";
 import RenderIf from "../components/RenderIf";
 import { Users } from "../database";
 
-function Project({ navigation }) {
+function Project({ navigation, route }) {
   const UpVote = (props) => <Icon {...props} name="arrow-upward-outline" />;
   const DownVote = (props) => <Icon {...props} name="arrow-downward-outline" />;
   const GiftIcon = (props) => <Icon {...props} name="gift-outline" />;
   const BinIcon = (props) => <Icon {...props} name="trash-2-outline" />;
   const HeartIcon = (props) => <Icon {...props} name="heart-outline" />;
+  const { data } = route.params;
 
   return (
     <Screen>
@@ -33,10 +34,10 @@ function Project({ navigation }) {
             marginHorizontal: "3%",
           }}
         >
-          Lorem Ipsum
+          {data.title}
         </Text>
         {RenderIf(
-          Users.type == "Developer",
+          data.remove == true,
           <View
             style={{
               flexDirection: "row",
@@ -46,7 +47,7 @@ function Project({ navigation }) {
               status="info"
               style={{ alignSelf: "center", fontWeight: "bold" }}
             >
-              100
+              {data.votes}
             </Text>
             <Button
               accessoryLeft={HeartIcon}
@@ -57,7 +58,7 @@ function Project({ navigation }) {
           </View>
         )}
         {RenderIf(
-          Users.type == "Donator",
+          data.remove == false,
           <View style={{ flexDirection: "row" }}>
             <Button
               accessoryLeft={UpVote}
@@ -65,7 +66,9 @@ function Project({ navigation }) {
               status="success"
               appearance="ghost"
             />
-            <Text style={{ alignSelf: "center", fontWeight: "bold" }}>150</Text>
+            <Text style={{ alignSelf: "center", fontWeight: "bold" }}>
+              {data.votes}
+            </Text>
             <Button
               accessoryLeft={DownVote}
               size="small"
@@ -84,11 +87,7 @@ function Project({ navigation }) {
         }}
         appearance="hint"
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non
-        accumsan leo. Nam lobortis dignissim nunc. Phasellus faucibus magna id
-        tincidunt commodo. In suscipit dictum tempor. In hac habitasse platea
-        dictumst. Proin rutrum porta nisl, eget lobortis nibh consectetur sed.
-        Morbi fringilla sodales odio, non fringilla dolor tincidunt vel. Sed.
+        {data.description}
       </Text>
       <Text
         category="h6"
@@ -110,10 +109,10 @@ function Project({ navigation }) {
         }}
         appearance="hint"
       >
-        Rs.10,000
+        Rs.{data.budget}
       </Text>
       {RenderIf(
-        Users.type == "Donator",
+        data.remove == false,
         <Button
           style={{ marginHorizontal: "2%", marginTop: "5%" }}
           status="primary"
@@ -124,7 +123,7 @@ function Project({ navigation }) {
         </Button>
       )}
       {RenderIf(
-        Users.type == "Developer",
+        data.remove == true,
         <Button
           style={{ marginHorizontal: "2%", marginTop: "5%" }}
           status="danger"

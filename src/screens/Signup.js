@@ -3,13 +3,14 @@ import {
   Icon,
   Input,
   Text,
-  Select,
   SelectItem,
   IndexPath,
+  Toggle,
 } from "@ui-kitten/components";
 import React from "react";
 import { Image, TouchableWithoutFeedback } from "react-native";
 import Screen from "../components/Screen";
+import { firebase } from "../firebase";
 
 function Signup({ navigation }) {
   const types = ["Developer", "Donator"];
@@ -35,6 +36,42 @@ function Signup({ navigation }) {
     </TouchableWithoutFeedback>
   );
 
+  const [checked, setChecked] = React.useState(false);
+
+  const onCheckedChange = (isChecked) => {
+    setChecked(isChecked);
+  };
+
+  const onRegisterPress = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((response) => {
+        const uid = response.user.uid;
+        //const itemID = response.doc.id;
+        const data = {
+          id: uid,
+          email,
+          name,
+          developer: checked,
+        };
+
+        const usersRef = firebase.firestore().collection("users");
+        usersRef
+          .doc(uid)
+          .set(data)
+          .then(() => {
+            navigation.navigate("ReminderScreen");
+          })
+          .catch((error) => {
+            alert(error);
+          });
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
   return (
     <Screen>
       <Image
@@ -59,18 +96,15 @@ function Signup({ navigation }) {
       >
         Create an Account
       </Text>
-      <Select
-        status="primary"
-        size="large"
-        style={{ marginHorizontal: "2%" }}
-        label="Account Type"
-        placeholder="Default"
-        value={accountType}
-        selectedIndex={selectedIndex}
-        onSelect={(index) => setSelectedIndex(index)}
+      <Text
+        category="p2"
+        style={{ fontWeight: "bold", textAlign: "center", marginBottom: "2%" }}
+        appearance="hint"
       >
-        {types.map(renderOption)}
-      </Select>
+        Are You a Developer?
+        <Toggle checked={checked} onChange={onCheckedChange}></Toggle>
+      </Text>
+
       <Input
         style={{ marginHorizontal: "2%", marginVertical: "1%" }}
         size="large"
@@ -104,7 +138,7 @@ function Signup({ navigation }) {
         style={{ margin: "2%" }}
         status="primary"
         size="giant"
-        onPress={() => navigation.navigate("ReminderScreen")}
+        onPress={() => onRegisterPress()}
       >
         Signup
       </Button>

@@ -52,6 +52,7 @@ export const Posts = [
 export const Users = {
   id: 123,
   type: "Developer",
+  developer: true,
   name: "Lorem Ipsum",
   email: "lorem@ipsum.com",
 };

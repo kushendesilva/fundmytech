@@ -2,11 +2,34 @@ import { Button, Input, Text } from "@ui-kitten/components";
 import React from "react";
 import { Image, ScrollView } from "react-native";
 import ScreenVariant from "../components/ScreenVariant";
+import { firebase } from "../firebase";
 
 function NewProject({ navigation }) {
   const [title, setTitle] = React.useState("");
   const [budget, setBudget] = React.useState("");
   const [description, setDescription] = React.useState("");
+
+  const postRef = firebase.firestore().collection("posts");
+
+  const onAddButtonPress = () => {
+    if (title && title.length > 0) {
+      const data = {
+        title,
+        budget,
+        description,
+        votes: 0,
+      };
+      postRef
+        .add(data)
+        .then((_doc) => {
+          setTitle("");
+          navigation.navigate("TabScreens");
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+  };
 
   return (
     <ScreenVariant>
@@ -58,7 +81,7 @@ function NewProject({ navigation }) {
           style={{ margin: "2%" }}
           status="primary"
           size="giant"
-          onPress={() => navigation.navigate("TabScreens")}
+          onPress={() => onAddButtonPress()}
         >
           Confirm
         </Button>
