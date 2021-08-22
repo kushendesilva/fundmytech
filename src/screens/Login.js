@@ -1,5 +1,5 @@
 import { Button, Icon, Input, Text, ButtonGroup } from "@ui-kitten/components";
-import React, { useState } from "react";
+import React from "react";
 import { Image, TouchableWithoutFeedback } from "react-native";
 import Screen from "../components/Screen";
 import { firebase } from "../firebase";
@@ -21,10 +21,7 @@ function Login({ navigation }) {
               return;
             }
             const user = firestoreDocument.data();
-            navigation.navigate("TabScreens", {
-              screen: "HomeScreen",
-              params: { user: user },
-            });
+            navigation.navigate("HomeScreen", { user: user });
           })
           .catch((error) => {
             alert(error);

@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as eva from "@eva-design/eva";
-import {
-  ApplicationProvider,
-  IconRegistry,
-  BottomNavigation,
-  BottomNavigationTab,
-  Icon,
-} from "@ui-kitten/components";
+import { ApplicationProvider, IconRegistry, Icon } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { ThemeContext } from "./src/theme";
 import Intro from "./src/screens/Intro";
@@ -17,9 +10,7 @@ import Signup from "./src/screens/Signup";
 import Login from "./src/screens/Login";
 import Reminder from "./src/screens/Reminder";
 import Project from "./src/screens/Project";
-import Account from "./src/screens/Account";
 import Home from "./src/screens/Home";
-import Settings from "./src/screens/Settings";
 import Earnings from "./src/screens/Earnings";
 import AccountInfo from "./src/screens/AccountInfo";
 import Insights from "./src/screens/Insights";
@@ -28,10 +19,6 @@ import NewProject from "./src/screens/NewProject";
 import { firebase } from "./src/firebase";
 
 const MainStack = createStackNavigator();
-const BottomTab = createBottomTabNavigator();
-const AccountIcon = (props) => <Icon {...props} name="person-outline" />;
-const HomeIcon = (props) => <Icon {...props} name="home-outline" />;
-const SettingsIcon = (props) => <Icon {...props} name="settings-outline" />;
 
 export default () => {
   const [theme, setTheme] = React.useState("dark");
@@ -117,8 +104,8 @@ export default () => {
                 }}
               />
               <MainStack.Screen
-                name="TabScreens"
-                component={TabNavigator}
+                name="HomeScreen"
+                component={Home}
                 options={{
                   title: "Home",
                   headerShown: false,
@@ -173,22 +160,3 @@ export default () => {
     </>
   );
 };
-
-const BottomTabBar = ({ navigation, state }) => (
-  <BottomNavigation
-    selectedIndex={state.index}
-    onSelect={(index) => navigation.navigate(state.routeNames[index])}
-  >
-    <BottomNavigationTab title="Home" icon={HomeIcon} />
-    <BottomNavigationTab title="Account" icon={AccountIcon} />
-    <BottomNavigationTab title="Settings" icon={SettingsIcon} />
-  </BottomNavigation>
-);
-
-const TabNavigator = () => (
-  <BottomTab.Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-    <BottomTab.Screen name="HomeScreen" component={Home} />
-    <BottomTab.Screen name="AccountScreen" component={Account} />
-    <BottomTab.Screen name="SettingsScreen" component={Settings} />
-  </BottomTab.Navigator>
-);
