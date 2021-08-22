@@ -8,7 +8,7 @@ import {
   Toggle,
 } from "@ui-kitten/components";
 import React from "react";
-import { Image, TouchableWithoutFeedback } from "react-native";
+import { Image, TouchableWithoutFeedback, View } from "react-native";
 import Screen from "../components/Screen";
 import { firebase } from "../firebase";
 
@@ -45,13 +45,14 @@ function Signup({ navigation }) {
   const onRegisterPress = () => {
     firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email.toLowerCase(), password)
       .then((response) => {
         const uid = response.user.uid;
         //const itemID = response.doc.id;
+        const emailLC = email.toLowerCase();
         const data = {
           id: uid,
-          email,
+          emailLC,
           name,
           developer: checked,
         };
@@ -96,14 +97,6 @@ function Signup({ navigation }) {
       >
         Create an Account
       </Text>
-      <Text
-        category="p2"
-        style={{ fontWeight: "bold", textAlign: "center", marginBottom: "2%" }}
-        appearance="hint"
-      >
-        Are You a Developer?
-        <Toggle checked={checked} onChange={onCheckedChange}></Toggle>
-      </Text>
 
       <Input
         style={{ marginHorizontal: "2%", marginVertical: "1%" }}
@@ -134,6 +127,33 @@ function Signup({ navigation }) {
         secureTextEntry={secureTextEntry}
         onChangeText={(nextValue) => setPassword(nextValue)}
       />
+      <View
+        style={{
+          alignContent: "center",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "3%",
+        }}
+      >
+        <Text
+          category="p2"
+          style={{
+            fontWeight: "bold",
+            textAlign: "center",
+            marginRight: "2%",
+          }}
+          appearance="hint"
+        >
+          Are You a Developer?
+        </Text>
+        <Toggle
+          style={{ marginLeft: "2%" }}
+          checked={checked}
+          onChange={onCheckedChange}
+        ></Toggle>
+      </View>
+
       <Button
         style={{ margin: "2%" }}
         status="primary"

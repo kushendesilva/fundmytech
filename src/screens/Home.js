@@ -1,14 +1,15 @@
-import { Text, TabBar, Tab, Icon } from "@ui-kitten/components";
+import { Text, TabBar, Tab, Icon, Button } from "@ui-kitten/components";
 import React from "react";
 import { FlatList, View } from "react-native";
 import Screen from "../components/Screen";
 import RegularPost from "../components/RegularPost";
 import DeveloperPost from "../components/DeveloperPost";
 import RenderIf from "../components/RenderIf";
-import { Posts } from "../database";
 import { firebase } from "../firebase";
+import ExtendedButton from "../components/ExtendedButton";
 
 function Home({ navigation, route }) {
+  const PlusIcon = (props) => <Icon {...props} name="plus-circle-outline" />;
   const PersonIcon = (props) => <Icon {...props} name="person-outline" />;
   const NewIcon = (props) => <Icon {...props} name="trending-up-outline" />;
   const { user } = route.params;
@@ -41,7 +42,7 @@ function Home({ navigation, route }) {
         ListHeaderComponent={() => (
           <View style={{ marginBottom: "2%" }}>
             {RenderIf(
-              user.developer == "Donator",
+              user.developer == false,
               <Text
                 category="h4"
                 status="primary"
@@ -56,13 +57,25 @@ function Home({ navigation, route }) {
             )}
             {RenderIf(
               user.developer == true,
-              <TabBar
-                selectedIndex={selectedIndex}
-                onSelect={(index) => setSelectedIndex(index)}
-              >
-                <Tab title="New Projects" icon={NewIcon} />
-                <Tab title="Your Projects" icon={PersonIcon} />
-              </TabBar>
+              <>
+                <TabBar
+                  selectedIndex={selectedIndex}
+                  onSelect={(index) => setSelectedIndex(index)}
+                >
+                  <Tab title="New Projects" icon={NewIcon} />
+                  <Tab title="Your Projects" icon={PersonIcon} />
+                </TabBar>
+                <ExtendedButton
+                  style={{ marginTop: "1%" }}
+                  title="New Project"
+                  tabIcon={PlusIcon}
+                  onPress={() =>
+                    navigation.navigate("NewProject", {
+                      user: user,
+                    })
+                  }
+                />
+              </>
             )}
           </View>
         )}
@@ -133,24 +146,26 @@ function Home({ navigation, route }) {
                 )}
                 {RenderIf(
                   selectedIndex == 1,
-                  <DeveloperPost
-                    onPress={() =>
-                      navigation.navigate("ProjectScreen", {
-                        data: {
-                          user: user,
-                          remove: true,
-                          title: item.title,
-                          votes: item.votes,
-                          description: item.description,
-                          budget: item.budget,
-                        },
-                      })
-                    }
-                    title={item.title}
-                    votes={item.votes}
-                    description={item.description}
-                    budget={item.budget}
-                  />
+                  <>
+                    <DeveloperPost
+                      onPress={() =>
+                        navigation.navigate("ProjectScreen", {
+                          data: {
+                            user: user,
+                            remove: true,
+                            title: item.title,
+                            votes: item.votes,
+                            description: item.description,
+                            budget: item.budget,
+                          },
+                        })
+                      }
+                      title={item.title}
+                      votes={item.votes}
+                      description={item.description}
+                      budget={item.budget}
+                    />
+                  </>
                 )}
               </>
             )}

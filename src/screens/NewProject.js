@@ -4,7 +4,8 @@ import { Image, ScrollView } from "react-native";
 import ScreenVariant from "../components/ScreenVariant";
 import { firebase } from "../firebase";
 
-function NewProject({ navigation }) {
+function NewProject({ navigation, route }) {
+  const { user } = route.params;
   const [title, setTitle] = React.useState("");
   const [budget, setBudget] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -18,6 +19,7 @@ function NewProject({ navigation }) {
         budget,
         description,
         votes: 0,
+        email: user.email,
       };
       postRef
         .add(data)

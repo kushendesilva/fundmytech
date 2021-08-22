@@ -10,7 +10,6 @@ function Account({ navigation }) {
   const PayPalIcon = (props) => <Icon {...props} name="credit-card-outline" />;
   const EarningsIcon = (props) => <Icon {...props} name="briefcase-outline" />;
   const InsightsIcon = (props) => <Icon {...props} name="activity-outline" />;
-  const PlusIcon = (props) => <Icon {...props} name="plus-circle-outline" />;
 
   return (
     <ScreenVariant>
@@ -35,11 +34,6 @@ function Account({ navigation }) {
       {RenderIf(
         Users.developer == true,
         <>
-          <ExtendedButton
-            title="New Project"
-            tabIcon={PlusIcon}
-            onPress={() => navigation.navigate("NewProject")}
-          />
           <ExtendedButton
             title="Earnings"
             tabIcon={EarningsIcon}

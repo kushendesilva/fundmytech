@@ -21,7 +21,6 @@ function Login({ navigation }) {
               return;
             }
             const user = firestoreDocument.data();
-            // navigation.navigate("InfoScreen", { user: user });
             navigation.navigate("TabScreens", {
               screen: "HomeScreen",
               params: { user: user },
