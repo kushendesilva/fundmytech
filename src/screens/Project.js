@@ -3,9 +3,10 @@ import React from "react";
 import { Image, View } from "react-native";
 import Screen from "../components/Screen";
 import RenderIf from "../components/RenderIf";
-import { Users } from "../database";
+import ExtendedButton from "../components/ExtendedButton";
 
 function Project({ navigation, route }) {
+  const AccountIcon = (props) => <Icon {...props} name="person-outline" />;
   const UpVote = (props) => <Icon {...props} name="arrow-upward-outline" />;
   const DownVote = (props) => <Icon {...props} name="arrow-downward-outline" />;
   const GiftIcon = (props) => <Icon {...props} name="gift-outline" />;
@@ -113,14 +114,17 @@ function Project({ navigation, route }) {
       </Text>
       {RenderIf(
         data.remove == false,
-        <Button
-          style={{ marginHorizontal: "2%", marginTop: "5%" }}
-          status="primary"
-          size="giant"
-          accessoryRight={GiftIcon}
-        >
-          Donate
-        </Button>
+        <>
+          <Button
+            style={{ marginHorizontal: "2%", marginTop: "5%" }}
+            status="primary"
+            size="giant"
+            accessoryRight={GiftIcon}
+          >
+            Donate
+          </Button>
+          <ExtendedButton title={data.name} tabIcon={AccountIcon} />
+        </>
       )}
       {RenderIf(
         data.remove == true,

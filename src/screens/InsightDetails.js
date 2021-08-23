@@ -5,9 +5,9 @@ import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { ThemeContext } from "../theme";
 import RenderIf from "../components/RenderIf";
-import { InsightsData } from "../database";
 
 function InsightDetails(props) {
+  const { votes } = props.route.params;
   const theme = useTheme();
   const themeContext = React.useContext(ThemeContext);
 
@@ -18,6 +18,7 @@ function InsightDetails(props) {
     backgroundGradientToOpacity: 0.5,
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
     strokeWidth: 2, // optional, default 3
+    decimalPlaces: 0,
     barPercentage: 0.5,
     useShadowColorFromDataset: false, // optional
   };
@@ -26,7 +27,7 @@ function InsightDetails(props) {
     backgroundColor: theme["color-primary-default"],
     backgroundGradientFrom: theme["color-primary-700"],
     backgroundGradientTo: theme["color-primary-400"],
-    decimalPlaces: 2, // optional, defaults to 2dp
+    decimalPlaces: 0, // optional, defaults to 2dp
     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
     labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
     style: {
@@ -50,19 +51,20 @@ function InsightDetails(props) {
           marginHorizontal: "3%",
         }}
       >
-        Views
+        Votes
       </Text>
-
       {RenderIf(
         themeContext.theme == "light",
         <LineChart
           data={{
-            labels: InsightsData.Labels,
-            datasets: InsightsData.Datasets,
+            datasets: [
+              {
+                data: [0, votes, 0],
+              },
+            ],
           }}
           width={Dimensions.get("window").width - 20}
           height={220}
-          yAxisSuffix="k"
           yAxisInterval={1}
           chartConfig={chartConfigLight}
           bezier
@@ -76,62 +78,14 @@ function InsightDetails(props) {
         themeContext.theme == "dark",
         <LineChart
           data={{
-            labels: InsightsData.Labels,
-            datasets: InsightsData.Datasets,
+            datasets: [
+              {
+                data: [0, votes, 0],
+              },
+            ],
           }}
           width={Dimensions.get("window").width - 20}
           height={220}
-          yAxisSuffix="k"
-          yAxisInterval={1}
-          chartConfig={chartConfigDark}
-          bezier
-          style={{
-            borderRadius: 16,
-            alignSelf: "center",
-          }}
-        />
-      )}
-
-      <Text
-        category="h5"
-        style={{
-          fontWeight: "bold",
-          textAlign: "center",
-          marginVertical: "2%",
-          marginHorizontal: "3%",
-        }}
-      >
-        Likes
-      </Text>
-      {RenderIf(
-        themeContext.theme == "light",
-        <LineChart
-          data={{
-            labels: InsightsData.Labels,
-            datasets: InsightsData.Datasets,
-          }}
-          width={Dimensions.get("window").width - 20}
-          height={220}
-          yAxisSuffix="k"
-          yAxisInterval={1}
-          chartConfig={chartConfigLight}
-          bezier
-          style={{
-            borderRadius: 16,
-            alignSelf: "center",
-          }}
-        />
-      )}
-      {RenderIf(
-        themeContext.theme == "dark",
-        <LineChart
-          data={{
-            labels: InsightsData.Labels,
-            datasets: InsightsData.Datasets,
-          }}
-          width={Dimensions.get("window").width - 20}
-          height={220}
-          yAxisSuffix="k"
           yAxisInterval={1}
           chartConfig={chartConfigDark}
           bezier

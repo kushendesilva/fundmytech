@@ -1,13 +1,41 @@
 import React, { useState } from "react";
 import { View, TouchableNativeFeedback } from "react-native";
-import { Input, Button, Layout, Icon } from "@ui-kitten/components";
+import { Input, Button, Icon } from "@ui-kitten/components";
 import RenderIf from "../components/RenderIf";
-import { Users } from "../database";
 import ScreenVariant from "../components/ScreenVariant";
+import { firebase } from "../firebase";
 
 function AppEditShop(props) {
-  const [name, setName] = useState(Users.name);
-  const [email, setEmail] = useState(Users.email);
+  const { user } = props.route.params;
+
+  const userRef = firebase.firestore().collection("users").doc(user.id);
+
+  const onEditButtonPress = () => {
+    if (
+      (name && name.length > 0 && email && email.length > 0) ||
+      (password && password.length > 0)
+    ) {
+      const data = {
+        name: name,
+        email: email,
+        id: user.id,
+        developer: user.developer,
+      };
+      userRef
+        .set(data)
+        .then((_doc) => {
+          setPassword("");
+          setVisibility(!visibility);
+          props.navigation.goBack();
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+  };
+
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
   const [visibility, setVisibility] = useState(true);
 
@@ -47,7 +75,7 @@ function AppEditShop(props) {
           label="Email"
           placeholder="Change Your Email"
           onChangeText={(nextValue) => setEmail(nextValue)}
-          disabled={visibility}
+          disabled={true}
         />
         <Input
           style={{ marginHorizontal: "2%", marginVertical: "1%" }}
@@ -59,7 +87,7 @@ function AppEditShop(props) {
           secureTextEntry={secureTextEntry}
           placeholder="Enter Your New Password"
           onChangeText={(nextValue) => setPassword(nextValue)}
-          disabled={visibility}
+          disabled={true}
         />
 
         {RenderIf(
@@ -100,7 +128,7 @@ function AppEditShop(props) {
               status="success"
               size="giant"
               onPress={() => {
-                setVisibility(!visibility);
+                onEditButtonPress();
               }}
             >
               Update

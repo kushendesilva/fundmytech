@@ -1,7 +1,6 @@
 import { TabBar, Tab, Icon, Text } from "@ui-kitten/components";
 import React from "react";
 import { FlatList, View } from "react-native";
-import Screen from "../components/Screen";
 import ScreenVariant from "../components/ScreenVariant";
 import RegularPost from "../components/RegularPost";
 import DeveloperPost from "../components/DeveloperPost";
@@ -41,6 +40,30 @@ function Home({ navigation, route }) {
           newPosts.push(post);
         });
         setPosts(newPosts);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
+
+  const [myPosts, setMyPosts] = React.useState([]);
+
+  const myPostRef = firebase
+    .firestore()
+    .collection("posts")
+    .where("email", "==", user.email);
+
+  React.useEffect(() => {
+    myPostRef.onSnapshot(
+      (querySnapshot) => {
+        const newMyPosts = [];
+        querySnapshot.forEach((doc) => {
+          const myPost = doc.data();
+          myPost.id = doc.id;
+          newMyPosts.push(myPost);
+        });
+        setMyPosts(newMyPosts);
       },
       (error) => {
         console.log(error);
@@ -97,6 +120,8 @@ function Home({ navigation, route }) {
                         votes: item.votes,
                         description: item.description,
                         budget: item.budget,
+                        email: item.email,
+                        name: item.name,
                       },
                     })
                   }
@@ -115,9 +140,21 @@ function Home({ navigation, route }) {
               <ExtendedButton
                 title="Account Information"
                 tabIcon={AccountIcon}
-                onPress={() => navigation.navigate("InfoScreen")}
+                onPress={() =>
+                  navigation.navigate("InfoScreen", {
+                    user: user,
+                  })
+                }
               />
-              <ExtendedButton title="PayPal" tabIcon={PayPalIcon} />
+              <ExtendedButton
+                title="PayPal"
+                tabIcon={PayPalIcon}
+                onPress={() =>
+                  navigation.navigate("InfoScreen", {
+                    user: user,
+                  })
+                }
+              />
             </>
           )}
           {RenderIf(
@@ -198,6 +235,8 @@ function Home({ navigation, route }) {
                         votes: item.votes,
                         description: item.description,
                         budget: item.budget,
+                        email: item.email,
+                        name: item.name,
                       },
                     })
                   }
@@ -231,8 +270,8 @@ function Home({ navigation, route }) {
               ItemSeparatorComponent={() => (
                 <View style={{ marginVertical: "1.5%" }} />
               )}
-              data={posts}
-              keyExtractor={(post) => post.id.toString()}
+              data={myPosts}
+              keyExtractor={(myPost) => myPost.id.toString()}
               renderItem={({ item }) => (
                 <DeveloperPost
                   onPress={() =>
@@ -244,6 +283,8 @@ function Home({ navigation, route }) {
                         votes: item.votes,
                         description: item.description,
                         budget: item.budget,
+                        email: item.email,
+                        name: item.name,
                       },
                     })
                   }
@@ -261,9 +302,21 @@ function Home({ navigation, route }) {
               <ExtendedButton
                 title="Account Information"
                 tabIcon={AccountIcon}
-                onPress={() => navigation.navigate("InfoScreen")}
+                onPress={() =>
+                  navigation.navigate("InfoScreen", {
+                    user: user,
+                  })
+                }
               />
-              <ExtendedButton title="PayPal" tabIcon={PayPalIcon} />
+              <ExtendedButton
+                title="PayPal"
+                tabIcon={PayPalIcon}
+                onPress={() =>
+                  navigation.navigate("InfoScreen", {
+                    user: user,
+                  })
+                }
+              />
               <ExtendedButton
                 style={{ marginTop: "1%" }}
                 title="New Project"
@@ -277,12 +330,20 @@ function Home({ navigation, route }) {
               <ExtendedButton
                 title="Earnings"
                 tabIcon={EarningsIcon}
-                onPress={() => navigation.navigate("EarningScreen")}
+                onPress={() =>
+                  navigation.navigate("EarningScreen", {
+                    user: user,
+                  })
+                }
               />
               <ExtendedButton
                 title="Insights"
                 tabIcon={InsightsIcon}
-                onPress={() => navigation.navigate("InsightScreen")}
+                onPress={() =>
+                  navigation.navigate("InsightScreen", {
+                    user: user,
+                  })
+                }
               />
             </>
           )}

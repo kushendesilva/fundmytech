@@ -20,6 +20,7 @@ function NewProject({ navigation, route }) {
         description,
         votes: 0,
         email: user.email,
+        name: user.name,
       };
       postRef
         .add(data)

@@ -58,10 +58,9 @@ export const Users = {
 };
 
 export const InsightsData = {
-  Labels: ["January", "February", "March", "April", "May", "June"],
   Datasets: [
     {
-      data: [100, 200, 300, 50, 550, 150],
+      data: [0, 200],
     },
   ],
 };

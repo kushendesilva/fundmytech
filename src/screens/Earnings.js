@@ -63,16 +63,27 @@ function Earnings(props) {
   return (
     <ScreenVariant>
       <Text
-        category="h5"
         style={{
-          fontWeight: "bold",
           textAlign: "center",
-          marginVertical: "2%",
-          marginHorizontal: "3%",
+          marginTop: "5%",
+          fontWeight: "bold",
         }}
+        category="h6"
       >
-        January
+        Today: {MyDateString}
       </Text>
+      <Text
+        style={{ textAlign: "center", marginTop: "5%", fontWeight: "bold" }}
+        category="h6"
+      >
+        Selected date: {selectedDate}
+      </Text>
+      <Datepicker
+        style={{ margin: "2%" }}
+        date={date}
+        onSelect={(nextDate) => setDate(nextDate)}
+        dateService={formatDateService}
+      />
 
       {RenderIf(
         themeContext.theme == "light",
@@ -110,24 +121,6 @@ function Earnings(props) {
           }}
         />
       )}
-      <Text
-        style={{ textAlign: "center", marginTop: "5%", fontWeight: "bold" }}
-        category="h6"
-      >
-        Selected date: {selectedDate}
-      </Text>
-      <Datepicker
-        style={{ margin: "2%" }}
-        date={date}
-        onSelect={(nextDate) => setDate(nextDate)}
-        dateService={formatDateService}
-      />
-      <Text
-        style={{ textAlign: "center", marginTop: "5%", fontWeight: "bold" }}
-        category="h6"
-      >
-        Today: {MyDateString}
-      </Text>
     </ScreenVariant>
   );
 }
